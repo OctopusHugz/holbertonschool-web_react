@@ -34,7 +34,7 @@ createEmployee = function (salary: number | string): Director | Teacher {
 }
 
 function isDirector(employee: Director | Teacher): employee is Director {
-	return (employee as Director).workDirectorTasks !== undefined;
+	return employee instanceof Director;
 }
 
 function executeWork(employee: Director | Teacher): void {
