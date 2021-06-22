@@ -21,9 +21,10 @@ const studentTwo: Student = {
 
 const studentsList: Array<Student> = [studentOne, studentTwo];
 const table: HTMLTableElement = document.createElement('table');
+const tBody: HTMLTableSectionElement = table.createTBody();
 
 studentsList.forEach((student) => {
-	const newRow: HTMLTableRowElement = table.insertRow();
+	const newRow: HTMLTableRowElement = tBody.insertRow();
 	const newRowFirstName: HTMLTableCellElement = newRow.insertCell();
 	const newRowLocation: HTMLTableCellElement = newRow.insertCell();
 	newRowFirstName.innerHTML = student.firstName;
