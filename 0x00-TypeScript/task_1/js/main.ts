@@ -41,5 +41,3 @@ export interface StudentClassInterface {
 export interface StudentConstructor {
 	new(firstName: string, lastName: string): StudentClassInterface;
 }
-
-// const StudentClass: StudentConstructor;
