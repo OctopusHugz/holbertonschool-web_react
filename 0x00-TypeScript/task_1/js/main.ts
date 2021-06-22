@@ -16,7 +16,7 @@ interface printTeacherFunction {
 }
 
 const printTeacher: printTeacherFunction = function (firstName: string, lastName: string): string {
-	return `${firstName.slice(0, 1)}. ${lastName}`
+	return `${firstName.slice(0, 1)} ${lastName}`
 }
 
 class StudentClass implements StudentInterface {
