@@ -24,7 +24,7 @@ const studentsList: Array<Student> = [student1, student2];
 const table: HTMLTableElement = document.createElement('table');
 body.appendChild(table);
 
-studentsList.forEach((student: Student): void => {
+studentsList.forEach((student: Student) => {
 	const newRow: HTMLTableRowElement = table.insertRow();
 	const newRowFirstName: HTMLTableCellElement = newRow.insertCell();
 	const newRowLocation: HTMLTableCellElement = newRow.insertCell();
