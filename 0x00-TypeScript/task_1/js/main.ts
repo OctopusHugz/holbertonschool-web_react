@@ -19,7 +19,7 @@ export const printTeacher: printTeacherFunction = function (firstName: string, l
 	return `${firstName[0]}. ${lastName}`;
 }
 
-export class StudentClass implements StudentClassInterface {
+export const StudentClass: StudentConstructor = class StudentClass implements StudentClassInterface {
 	firstName: string;
 	lastName: string;
 	constructor(firstName: string, lastName: string) {
