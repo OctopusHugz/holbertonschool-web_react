@@ -5,14 +5,14 @@ interface Student {
 	location: string;
 }
 
-const student1: Student = {
+const studentOne: Student = {
 	firstName: 'Malcolm',
 	lastName: 'Miller',
 	age: 27,
 	location: 'Los Angeles'
 }
 
-const student2: Student = {
+const studentTwo: Student = {
 	firstName: 'Bill',
 	lastName: 'Hicks',
 	age: 32,
@@ -20,7 +20,7 @@ const student2: Student = {
 }
 
 const body: HTMLBodyElement = document.getElementsByTagName("body")[0];
-const studentsList: Array<Student> = [student1, student2];
+const studentsList: Array<Student> = [studentOne, studentTwo];
 const table: HTMLTableElement = document.createElement('table');
 body.appendChild(table);
 
