@@ -19,9 +19,10 @@ const student2: Student = {
 	location: 'Chicago'
 }
 
+const body: HTMLElement = document.body;
 const studentsList: Student[] = [student1, student2];
 const table: HTMLTableElement = document.createElement('table');
-document.body.appendChild(table);
+body.appendChild(table);
 
 studentsList.forEach((student: Student): void => {
 	const newRow: HTMLTableRowElement = table.insertRow();
