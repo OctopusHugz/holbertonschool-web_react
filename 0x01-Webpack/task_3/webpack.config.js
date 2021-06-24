@@ -8,9 +8,16 @@ module.exports = {
 	},
 	mode: 'development',
 	devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 8564,
+		contentBase: './public',
+		compress: true,
+		port: 8564,
+	},
+	devtool: 'inline-source-map',
+	optimization: {
+    splitChunks: {
+      // include all types of chunks
+      chunks: 'all',
+    },
   },
 	module: {
     rules: [
