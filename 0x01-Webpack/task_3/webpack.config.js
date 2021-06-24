@@ -4,9 +4,14 @@ module.exports = {
 	entry: './js/dashboard_main.js',
 	output: {
 		path: path.resolve(__dirname, 'public'),
-		filename: 'bundle.js'
+		filename: '[name].bundle.js'
 	},
-	mode: 'production',
+	mode: 'development',
+	devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 8564,
+  },
 	module: {
     rules: [
 			{
