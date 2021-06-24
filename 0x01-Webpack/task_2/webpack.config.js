@@ -1,6 +1,4 @@
 const path = require('path');
-const ImageminPlugin = require('imagemin-webpack-plugin').default
-const imageminJpegtran = require('imagemin-jpegtran');
 
 module.exports = {
 	entry: './js/dashboard_main.js',
@@ -15,19 +13,18 @@ module.exports = {
 				test: /\.css$/, use: ['style-loader', 'css-loader']
 			},
 			{
-				test: /\.(jpe?g|png|gif|svg)$/i,
-				type: 'asset/resource',
-			},
+				test: /\.(gif|png|jpe?g|svg)$/i,
+				use: [
+					'file-loader',
+					{
+						loader: 'image-webpack-loader',
+						options: {
+							bypassOnDebug: true, // webpack@1.x
+							disable: true, // webpack@2.x and newer
+						},
+					},
+				],
+			}
     ],
 	},
-	plugins: [
-		new ImageminPlugin({
-      plugins: [
-        imageminJpegtran({
-          quality: 50,
-          progressive: true,
-        })
-      ]
-    })
-  ],
 }
