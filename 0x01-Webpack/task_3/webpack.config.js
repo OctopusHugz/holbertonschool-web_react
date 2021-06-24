@@ -1,7 +1,11 @@
 const path = require('path');
 
 module.exports = {
-	entry: './js/dashboard_main.js',
+	entry: {
+    header: './modules/header/header.js',
+    body: './modules/body/body.js',
+    footer: './modules/footer/footer.js',
+  },
 	output: {
 		path: path.resolve(__dirname, 'public'),
 		filename: '[name].bundle.js'
@@ -18,6 +22,9 @@ module.exports = {
       // include all types of chunks
       chunks: 'all',
     },
+	},
+	performance: {
+    maxAssetSize: 100000,
   },
 	module: {
     rules: [
