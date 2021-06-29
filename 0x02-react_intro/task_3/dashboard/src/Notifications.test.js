@@ -2,11 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Notifications from './Notifications'
 
-// verify that Notifications renders three list items
-// verify that Notifications renders the text Here is the list of notifications
-
-// You must use shallow rendering to write the React tests
-
 describe('<Notifications />', () => {
   it('renders an <Notifications /> component', () => {
     const wrapper = shallow(<Notifications />);
