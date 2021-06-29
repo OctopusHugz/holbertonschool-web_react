@@ -1,29 +1,20 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports = {
 	entry: '../src/index.js',
 	output: {
-		path: path.resolve(__dirname, 'public'),
+		path: path.resolve('./public'),
 		filename: 'bundle.js',
 		clean: true,
 	},
-	plugins: [new HtmlWebpackPlugin()],
 	mode: 'development',
 	devServer: {
-		contentBase: '../dist/',
+		contentBase: path.resolve('../dist/'),
 		compress: true,
 		port: 8564,
 		hot: true,
 	},
 	devtool: 'inline-source-map',
-	optimization: {
-    splitChunks: {
-      // include all types of chunks
-      chunks: 'all',
-    },
-	},
 	performance: {
     maxAssetSize: 100000,
   },
@@ -46,17 +37,25 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.m?js$/,
+				test: /\.js$/,
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: [
-							['@babel/preset-env', { targets: "defaults" }]
-						]
+						presets: ['@babel/preset-env', '@babel/react']
 					}
 				}
-			}
+			},
+			{
+				test: /\.jsx$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['@babel/preset-env', '@babel/react']
+					}
+				}
+			},
     ],
 	},
 }
