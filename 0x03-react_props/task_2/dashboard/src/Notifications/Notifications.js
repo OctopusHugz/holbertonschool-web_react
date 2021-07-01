@@ -1,5 +1,6 @@
 import React from 'react'
 import './Notifications.css'
+import NotificationItem from './NotificationItem'
 import icon from '../assets/close-icon.png'
 import { getLatestNotification } from '../utils/utils'
 
@@ -17,9 +18,9 @@ const Notifications = () => {
 				<img src={icon} alt="" style={{ height: '3vh'}} />
 			</button>
 			<ul>
-				<li data-priority="default">New course available</li>
-				<li data-priority="urgent">New resume available</li>
-				<li dangerouslySetInnerHTML={htmlObj} data-priority="urgent"></li>
+				<NotificationItem type="default" value="New course available"/>
+				<NotificationItem type="urgent" value="New resume available"/>
+				<NotificationItem type="urgent" html={htmlObj}/>
 			</ul>
 		</div>
 	)
