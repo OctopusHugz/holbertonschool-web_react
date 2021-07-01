@@ -4,7 +4,7 @@ import "./Login.css";
 const Login = () => {
   return (
     <>
-      <div className="Login">
+      <div className="App-login">
         <p>Login to access the full dashboard</p>
         <form>
           <label>

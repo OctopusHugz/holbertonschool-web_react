@@ -1,8 +1,8 @@
 /* Login CSS */
-.Login {
+.App-login {
   height: 37vh;
 }
 
-.Login p {
+.App-login p {
   margin: 3rem 0rem 2rem 2rem;
 }
