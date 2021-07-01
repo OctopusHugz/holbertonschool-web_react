@@ -32,7 +32,8 @@
     "build": "webpack -c ./config/webpack.config.js",
     "start-dev": "webpack serve --mode development -c ./config/webpack.config.js --open",
     "start": "webpack-dev-server --mode development --config config/webpack.config.js",
-    "test": "jest"
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "jest": {
     "verbose": true,
