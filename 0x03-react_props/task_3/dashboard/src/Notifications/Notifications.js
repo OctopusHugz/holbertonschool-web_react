@@ -18,7 +18,7 @@ const Notifications = () => {
 				<img src={icon} alt="" style={{ height: '3vh'}} />
 			</button>
 			<ul>
-				<NotificationItem type="default" value="New course available"/>
+				<NotificationItem type="urgent" value="New course available"/>
 				<NotificationItem type="urgent" value="New resume available"/>
 				<NotificationItem type="urgent" html={htmlObj}/>
 			</ul>
