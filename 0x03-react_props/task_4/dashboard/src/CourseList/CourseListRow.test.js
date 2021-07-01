@@ -21,7 +21,7 @@ describe('<CourseListRow />', () => {
 		expect(wrapper.find('th').get(0).props.children).toEqual('First cell text');
 		expect(wrapper.find('th').get(1).props.children).toEqual('Second cell text');
 	});
-	// Add a check to test the component renders correctly two td elements within a tr element
+
 	it('renders a <CourseListRow /> component with isHeader set to false', () => {
     const wrapper = shallow(<CourseListRow isHeader={false}/>);
 		expect(wrapper.find('tr td')).toHaveLength(2);
