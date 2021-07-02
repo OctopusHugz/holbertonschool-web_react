@@ -4,7 +4,7 @@ import CourseListRow from './CourseListRow';
 
 describe('<CourseListRow />', () => {
   it('renders a <CourseListRow /> component', () => {
-    const wrapper = shallow(<CourseListRow />);
+    const wrapper = shallow(<CourseListRow textFirstCell="First cell text"/>);
     expect(wrapper).toHaveLength(1);
 	});
 
@@ -22,8 +22,8 @@ describe('<CourseListRow />', () => {
 		expect(wrapper.find('th').get(1).props.children).toEqual('Second cell text');
 	});
 
-	it('renders a <CourseListRow /> component with isHeader set to false', () => {
-    const wrapper = shallow(<CourseListRow isHeader={false}/>);
+	it('renders a <CourseListRow /> component with isHeader set to false by default', () => {
+    const wrapper = shallow(<CourseListRow textFirstCell="First cell text"/>);
 		expect(wrapper.find('tr td')).toHaveLength(2);
 	});
 });
