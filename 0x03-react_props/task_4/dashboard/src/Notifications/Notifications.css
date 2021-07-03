@@ -1,6 +1,13 @@
+.menuItem {
+	display: flex;
+	justify-content: flex-end;
+}
+
 .Notifications {
-	border: 2px black solid;
+	border: 1px red dashed;
 	padding: 1rem;
+	width: 35%;
+	float: right;
 }
 
 [data-notification-type="default"] {
