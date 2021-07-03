@@ -14,28 +14,30 @@ const Notifications = ({ displayDrawer, listNotifications }) => {
       <div className="menuItem">Your notifications</div>
       {displayDrawer && (
         <div className="Notifications">
-          <p style={{ display: "inline" }}>Here is the list of notifications</p>
-          <button
-            style={{ float: "right" }}
-            aria-label="Close"
-            onClick={clickClose}
-          >
-            <img src={icon} alt="" style={{ height: "3vh" }} />
-          </button>
-          <ul>
-            {listNotifications.length === 0 ? (
-              <li>No new notification for now</li>
-            ) : (
-              listNotifications.map((notification) => (
+          {listNotifications.length > 0 ? (
+            <>
+              <p style={{ display: "inline" }}>
+                Here is the list of notifications
+              </p>
+              <button
+                style={{ float: "right" }}
+                aria-label="Close"
+                onClick={clickClose}
+              >
+                <img src={icon} alt="" style={{ height: "3vh" }} />
+              </button>
+              <ul>
+              {listNotifications.map((notification) => (
                 <NotificationItem
                   key={notification.id}
                   type={notification.type}
                   value={notification.value}
                   html={notification.html}
                 />
-              ))
-            )}
-          </ul>
+              ))}
+            </ul>
+            </>
+          ) : <p>No new notification for now</p>}
         </div>
       )}
     </>
