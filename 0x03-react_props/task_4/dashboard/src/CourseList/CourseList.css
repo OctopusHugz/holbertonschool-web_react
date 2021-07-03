@@ -2,8 +2,6 @@
 #CourseList {
 	width: 90%;
 	margin: 40px auto 250px auto;
-	/* margin-left: auto;
-	margin-right: auto; */
   min-height: 150px;
 	border: 1px solid grey;
 }
