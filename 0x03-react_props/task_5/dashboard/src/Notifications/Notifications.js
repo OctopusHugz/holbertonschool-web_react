@@ -2,16 +2,13 @@ import React from "react";
 import "./Notifications.css";
 import NotificationItem from "./NotificationItem";
 import icon from "../assets/close-icon.png";
-import { getLatestNotification } from "../utils/utils";
 import PropTypes from "prop-types";
+import NotificationItemShape from "./NotificationItemShape";
 
-const Notifications = ({ displayDrawer }) => {
+const Notifications = ({ displayDrawer, listNotifications }) => {
   function clickClose() {
     console.log("Close button has been clicked");
   }
-  const htmlObj = {
-    __html: getLatestNotification(),
-  };
   return (
     <>
       <div className="menuItem">Your notifications</div>
@@ -26,9 +23,18 @@ const Notifications = ({ displayDrawer }) => {
             <img src={icon} alt="" style={{ height: "3vh" }} />
           </button>
           <ul>
-            <NotificationItem type="default" value="New course available" />
-            <NotificationItem type="urgent" value="New resume available" />
-            <NotificationItem type="urgent" html={htmlObj} />
+            {listNotifications.length === 0 ? (
+              <li>No new notification for now</li>
+            ) : (
+              listNotifications.map((notification) => (
+                <NotificationItem
+                  key={notification.id}
+                  type={notification.type}
+                  value={notification.value}
+                  html={notification.html}
+                />
+              ))
+            )}
           </ul>
         </div>
       )}
@@ -38,10 +44,12 @@ const Notifications = ({ displayDrawer }) => {
 
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
+  listNotifications: PropTypes.arrayOf(NotificationItemShape),
 };
 
 Notifications.defaultProps = {
   displayDrawer: false,
+  listNotifications: [],
 };
 
 export default Notifications;
