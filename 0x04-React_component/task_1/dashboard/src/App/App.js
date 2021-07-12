@@ -12,15 +12,33 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.isLoggedIn = this.props.isLoggedIn;
+    this.logOut = this.props.logOut;
   }
 
   static propTypes = {
-    isLoggedIn: PropTypes.bool
+    isLoggedIn: PropTypes.bool,
+    logOut: PropTypes.func
   }
 
   static defaultProps = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    logOut: () => {}
   };
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeydown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeydown);
+  }
+
+  handleKeydown = (event) => {
+    if (event.ctrlKey && event.key === 'h') {
+      console.log('Logging you out');
+      this.logOut();
+    }
+  }
 
   render() {
     const listCourses = [
