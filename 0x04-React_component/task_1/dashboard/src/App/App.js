@@ -9,11 +9,7 @@ import PropTypes from 'prop-types';
 import { getLatestNotification } from "../utils/utils";
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    // this.isLoggedIn = this.props.isLoggedIn;
-    // this.logOut = this.props.logOut;
-  }
+  constructor(props) { super(props); }
 
   static propTypes = {
     isLoggedIn: PropTypes.bool,
