@@ -9,8 +9,7 @@ import NotificationItemShape from "./NotificationItemShape";
 export default class Notifications extends Component {
   constructor(props) {
     super(props);
-    this.displayDrawer = this.props.displayDrawer;
-    this.listNotifications = this.props.listNotifications;
+    this.markAsRead = this.markAsRead.bind(this);
   }
 
   static propTypes = {
@@ -27,13 +26,17 @@ export default class Notifications extends Component {
     console.log("Close button has been clicked");
   }
 
+  markAsRead(id) {
+    console.log(`Notification ${id} has been marked as read`);
+  }
+
   render() {
     return (
       <>
         <div className="menuItem">Your notifications</div>
-        {this.displayDrawer && (
+        {this.props.displayDrawer && (
           <div className="Notifications">
-            {this.listNotifications.length > 0 ? (
+            {this.props.listNotifications.length > 0 ? (
               <>
                 <p style={{ display: "inline" }}>
                   Here is the list of notifications
@@ -46,12 +49,13 @@ export default class Notifications extends Component {
                   <img src={icon} alt="" style={{ height: "3vh" }} />
                 </button>
                 <ul>
-                  {this.listNotifications.map((notification) => (
+                  {this.props.listNotifications.map((notification) => (
                     <NotificationItem
                       key={notification.id}
                       type={notification.type}
                       value={notification.value}
                       html={notification.html}
+                      markAsRead={() => {this.markAsRead(notification.id)}}
                     />
                   ))}
                 </ul>
