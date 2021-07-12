@@ -49,24 +49,20 @@ describe("<App />", () => {
   });
 
   it("checks behavior of logOut prop", () => {
-    // window.addEventListener = jest.fn();
-    // window.removeEventListener = jest.fn();
-    // jest.spyOn(window, 'alert').mockImplementation(() => {});
-    // Object.defineProperty(global, "window", {
-    //   value: {
-    //     alert: jest.fn(),
-    //   },
-    // });
+    const map = {};
+    window.addEventListener = jest.fn().mockImplementation((event, cb) => {
+      map[event] = cb;
+    });
     window.alert = jest.fn();
-    // const spiedAlert = jest.spyOn(window, "alert").mockImplementation(() => {});
-    const spiedLogOut = jest.spyOn(App.propTypes, 'logOut');
-    const wrapper = shallow(<App isLoggedIn={true} />);
-    // wrapper.simulate('keydown', { ctrlKey: true, key: 'h' });
-    wrapper.simulate("keydown", { key: "Ctrl", keyCode: "73", which: "73" });
-    // expect(window.alert).toHaveBeenCalledWith("Logging you out");
-    expect(spiedLogOut).toHaveBeenCalled();
-    jest.restoreAllMocks();
-    // window.alert.mockRestore();
-    // spiedAlert.mockRestore();
+
+    const testProps = {
+      logOut: jest.fn()
+    }
+
+    const wrapper = mount(<App isLoggedIn={true} {...testProps}/>);
+    map.keydown({ ctrlKey: true, key: "h" });
+    expect(window.alert).toHaveBeenCalledWith("Logging you out");
+    expect(testProps.logOut).toHaveBeenCalled();
+    window.alert.mockRestore();
   });
 });
