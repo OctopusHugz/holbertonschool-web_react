@@ -32,7 +32,7 @@ export default class App extends Component {
   handleKeydown = (event) => {
     if (event.ctrlKey && event.key === 'h') {
       alert('Logging you out');
-      this.logOut();
+      this.props.logOut();
     }
   }
 
