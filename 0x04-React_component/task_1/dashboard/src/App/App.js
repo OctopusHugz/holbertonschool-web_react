@@ -11,8 +11,8 @@ import { getLatestNotification } from "../utils/utils";
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.isLoggedIn = this.props.isLoggedIn;
-    this.logOut = this.props.logOut;
+    // this.isLoggedIn = this.props.isLoggedIn;
+    // this.logOut = this.props.logOut;
   }
 
   static propTypes = {
@@ -36,7 +36,7 @@ export default class App extends Component {
   handleKeydown = (event) => {
     if (event.ctrlKey && event.key === 'h') {
       alert('Logging you out');
-      this.logOut();
+      this.props.logOut();
     }
   }
 
@@ -61,7 +61,7 @@ export default class App extends Component {
       <div className="App">
         <Header />
         <hr />
-        {this.isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
+        {this.props.isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
         <hr />
         <Footer />
       </div>
