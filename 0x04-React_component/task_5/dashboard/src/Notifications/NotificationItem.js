@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, memo } from 'react';
 import PropTypes from 'prop-types';
 
 const NotificationItem = ({ type, html, value, markAsRead }) => {
@@ -21,4 +21,4 @@ NotificationItem.defaultProps = {
 	onClick: () => {}
 };
 
-export default NotificationItem
+export default memo(NotificationItem)
