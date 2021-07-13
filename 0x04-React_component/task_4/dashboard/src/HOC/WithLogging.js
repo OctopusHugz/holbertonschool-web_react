@@ -8,11 +8,11 @@ const WithLogging = (WrappedComponent) => {
 		constructor(props) { super(props); }
 
 		componentDidMount() {
-			console.log(`Component ${WrappedComponent.name} is mounted`)
+			console.log(`Component ${getDisplayName(WrappedComponent)} is mounted`)
 		}
 
 		componentWillUnmount() {
-			console.log(`Component ${WrappedComponent.name} is going to unmount`)
+			console.log(`Component ${getDisplayName(WrappedComponent)} is going to unmount`)
 		}
 
 		render() {
