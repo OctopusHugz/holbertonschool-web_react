@@ -22,6 +22,12 @@ export default class Notifications extends Component {
     listNotifications: [],
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.listNotifications.length > this.props.listNotifications.length)
+      return true;
+    return false;
+  }
+
   clickClose() {
     console.log("Close button has been clicked");
   }
