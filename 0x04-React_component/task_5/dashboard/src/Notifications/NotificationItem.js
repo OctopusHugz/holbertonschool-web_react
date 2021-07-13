@@ -1,4 +1,4 @@
-import { React, memo } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const NotificationItem = ({ type, html, value, markAsRead }) => {
