@@ -71,5 +71,13 @@ describe('<Notifications />', () => {
     const wrapper = shallow(<Notifications displayDrawer={true} />);
     expect(wrapper.find('.Notifications p').text()).not.toEqual('Here is the list of notifications');
     expect(wrapper.find('.Notifications p').text()).toEqual('No new notification for now');
-	});
+  });
+
+  it('verifies console.log output when calling the function markAsRead on an instance of the component', () => {
+    const spy = jest.spyOn(console, 'log');
+    const wrapper = shallow(<Notifications displayDrawer={true} />);
+    const instance = wrapper.instance();
+    instance.markAsRead(1);
+    expect(spy).toHaveBeenCalledWith('Notification 1 has been marked as read');
+  });
 });
