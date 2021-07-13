@@ -5,6 +5,7 @@ import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import CourseList from "../CourseList/CourseList";
+import BodySection from '../BodySection/BodySection';
 import PropTypes from 'prop-types';
 import { getLatestNotification } from "../utils/utils";
 
@@ -59,6 +60,9 @@ export default class App extends Component {
         <hr />
         {this.props.isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
         <hr />
+        <BodySection title="test">
+          <p>test</p>
+        </BodySection>
         <Footer />
       </div>
     </>
