@@ -1,24 +1,17 @@
 import React from "react";
 import PropTypes from 'prop-types';
-
-const rowStyle = {
-  backgroundColor: '#f5f5f5ab',
-}
-
-const headerRowStyle = {
-  backgroundColor: '#deb5b545',
-}
+import { StyleSheet, css } from 'aphrodite';
 
 const CourseListRow = ({ isHeader, textFirstCell, textSecondCell }) => {
   return (
-    <tr style={isHeader ? headerRowStyle : rowStyle}>
+    <tr className={isHeader ? css(styles.headerRowStyle) : css(styles.defaultRowStyle)}>
       {isHeader && textSecondCell === null && (
-        <th colSpan={2}>{textFirstCell}</th>
+        <th colSpan={2} className={css(styles.thBorderBottom)}>{textFirstCell}</th>
       )}
       {isHeader && textSecondCell !== null && (
         <>
-          <th>{textFirstCell}</th>
-          <th>{textSecondCell}</th>
+          <th className={css(styles.textAlignLeft, styles.thBorderBottom)}>{textFirstCell}</th>
+          <th className={css(styles.textAlignLeft, styles.thBorderBottom)}>{textSecondCell}</th>
         </>
       )}
       {!isHeader && (
@@ -44,5 +37,23 @@ CourseListRow.defaultProps = {
   isHeader: false,
   textSecondCell: null
 };
+
+const styles = StyleSheet.create({
+  headerRowStyle: {
+    backgroundColor: '#deb5b545',
+  },
+
+  defaultRowStyle: {
+    backgroundColor: '#f5f5f5ab',
+  },
+
+  textAlignLeft: {
+    textAlign: 'left',
+  },
+
+  thBorderBottom: {
+    borderBottom: '1px solid grey',
+  },
+})
 
 export default CourseListRow;
