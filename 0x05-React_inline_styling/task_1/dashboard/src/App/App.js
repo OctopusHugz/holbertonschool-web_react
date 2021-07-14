@@ -56,9 +56,9 @@ export default class App extends Component {
     ];
 
     return (
-      <>
+      <div className={css(styles.bodyStyle)}>
         <Notifications listNotifications={listNotifications} />
-        <div className={css(styles.bodyStyle)}>
+        <div className="App">
           <Header />
           <hr className={css(styles.hrStyle)}/>
           {this.props.isLoggedIn ? (
@@ -76,7 +76,7 @@ export default class App extends Component {
           <hr className={css(styles.hrStyle)}/>
           <Footer className={css(styles.footerStyle)}/>
         </div>
-      </>
+      </div>
     );
   }
 }
