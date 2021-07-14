@@ -17,9 +17,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '25vh',
     minHeight: 150,
-    '@media (max-width: 900px)': {
-      display: 'none',
-    }
   },
 
   logoStyle: {
