@@ -1,11 +1,13 @@
 /**
  * @jest-environment jsdom
  */
-
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('<NotificationItem />', () => {
   it('renders a <NotificationItem /> component', () => {

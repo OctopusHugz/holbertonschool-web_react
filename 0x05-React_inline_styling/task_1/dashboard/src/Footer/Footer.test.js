@@ -1,6 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Footer from './Footer';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 describe('<Footer />', () => {
   it('renders a <Footer /> component', () => {
@@ -10,6 +13,6 @@ describe('<Footer />', () => {
 
 	it('renders a <Footer /> component and checks contents', () => {
     const wrapper = shallow(<Footer />);
-    expect(wrapper.find('div.App-footer p').text()).toContain('Copyright');
+    expect(wrapper.find('footer p').text()).toContain('Copyright');
 	});
 });

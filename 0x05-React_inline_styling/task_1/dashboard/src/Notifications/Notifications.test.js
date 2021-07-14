@@ -3,6 +3,9 @@ import { shallow } from 'enzyme';
 import Notifications from './Notifications'
 import NotificationItem from './NotificationItem';
 import { getLatestNotification } from "../utils/utils";
+import { StyleSheetTestUtils } from 'aphrodite';
+
+StyleSheetTestUtils.suppressStyleInjection();
 
 const htmlObj = {
   __html: getLatestNotification(),
