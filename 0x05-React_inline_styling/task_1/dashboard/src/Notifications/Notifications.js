@@ -4,6 +4,7 @@ import NotificationItem from "./NotificationItem";
 import icon from "../assets/close-icon.png";
 import PropTypes from "prop-types";
 import NotificationItemShape from "./NotificationItemShape";
+import { StyleSheet, css } from 'aphrodite';
 
 
 export default class Notifications extends Component {
@@ -41,7 +42,7 @@ export default class Notifications extends Component {
       <>
         <div className="menuItem">Your notifications</div>
         {this.props.displayDrawer && (
-          <div className="Notifications">
+          <div className={css(styles.notificationPanelStyle)}>
             {this.props.listNotifications.length > 0 ? (
               <>
                 <p style={{ display: "inline" }}>
@@ -73,3 +74,12 @@ export default class Notifications extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  notificationPanelStyle: {
+    border: '1px red dashed',
+    padding: '1rem',
+    width: '35%',
+    float: 'right',
+  },
+})
