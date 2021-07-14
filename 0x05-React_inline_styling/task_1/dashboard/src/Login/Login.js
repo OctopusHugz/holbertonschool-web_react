@@ -3,7 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 const Login = () => {
   return (
-    <>
+    <div className="App-login">
       <div className={css(styles.loginStyle)}>
         <p className={css(styles.loginPStyle)}>Login to access the full dashboard</p>
         <form className={css(styles.loginFormStyle)}>
@@ -18,7 +18,7 @@ const Login = () => {
           <button>OK</button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
