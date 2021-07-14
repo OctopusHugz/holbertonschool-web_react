@@ -5,11 +5,6 @@ import PropTypes from "prop-types";
 import NotificationItemShape from "./NotificationItemShape";
 import { StyleSheet, css } from 'aphrodite';
 
-// const menuItemStyle = {
-//   display: 'flex',
-//   justifyContent: 'flex-end',
-// }
-
 export default class Notifications extends Component {
   constructor(props) {
     super(props);
