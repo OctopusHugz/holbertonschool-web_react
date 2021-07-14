@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 const NotificationItem = ({ type, html, value, markAsRead }) => {
 	return (
-		<li className={type === 'default' ? css(styles.defaultNotificationStyle) : css(styles.urgentNotificationStyle)} data-notification-type={type} dangerouslySetInnerHTML={html} onClick={markAsRead}>{value}</li>
+		<li className={type === 'default' ? css(styles.defaultNotificationStyle, styles.smallNotificationStyle) : css(styles.urgentNotificationStyle, styles.smallNotificationStyle)} data-notification-type={type} dangerouslySetInnerHTML={html} onClick={markAsRead}>{value}</li>
 	)
 }
 
@@ -29,7 +29,15 @@ const styles = StyleSheet.create({
 
   urgentNotificationStyle: {
 		color: 'red',
-  },
+	},
+
+	smallNotificationStyle: {
+		'@media (max-width: 900px)': {
+			borderBottom: '1px solid black',
+			padding: '10px 8px'
+    }
+
+	}
 })
 
 export default memo(NotificationItem)

@@ -5,10 +5,10 @@ import PropTypes from "prop-types";
 import NotificationItemShape from "./NotificationItemShape";
 import { StyleSheet, css } from 'aphrodite';
 
-const menuItemStyle = {
-  display: 'flex',
-  justifyContent: 'flex-end',
-}
+// const menuItemStyle = {
+//   display: 'flex',
+//   justifyContent: 'flex-end',
+// }
 
 export default class Notifications extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ export default class Notifications extends Component {
   render() {
     return (
       <>
-        <div className="menuItem" style={menuItemStyle}>Your notifications</div>
+        <div className="menuItem" className={css(styles.menuItemStyle)}>Your notifications</div>
         {this.props.displayDrawer && (
           <div className={css(styles.notificationPanelStyle)}>
             <div className="Notifications">
@@ -59,7 +59,7 @@ export default class Notifications extends Component {
                 >
                   <img src={icon} alt="" style={{ height: "3vh" }} />
                 </button>
-                <ul>
+                <ul className={css(styles.listStyle)}>
                   {this.props.listNotifications.map((notification) => (
                     <NotificationItem
                       key={notification.id}
@@ -87,5 +87,26 @@ const styles = StyleSheet.create({
     padding: '1rem',
     width: '35%',
     float: 'right',
+    '@media (max-width: 900px)': {
+      border: 'none',
+      height: '100vh',
+      width: '100vw',
+      float: 'none',
+      padding: 0,
+      fontSize: 20,
+    }
   },
+
+  menuItemStyle: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    '@media (max-width: 900px)': {
+      display: 'none',
+    }
+  },
+
+  listStyle: {
+    listStyle: 'none',
+    padding: 0
+  }
 })
