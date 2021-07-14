@@ -4,11 +4,11 @@ import { StyleSheet, css } from 'aphrodite';
 
 const Footer = () => {
   return (
-    <div className={css(styles.footerStyle)}>
+    <footer className={css(styles.footerStyle)}>
       <p>
         Copyright {getFullYear()} - {getFooterCopy(true)}
       </p>
-    </div>
+    </footer>
   );
 };
 
