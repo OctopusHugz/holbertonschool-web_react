@@ -43,8 +43,9 @@ export default class Notifications extends Component {
         <div className="menuItem">Your notifications</div>
         {this.props.displayDrawer && (
           <div className={css(styles.notificationPanelStyle)}>
-            {this.props.listNotifications.length > 0 ? (
-              <>
+            <div className="Notifications">
+              {this.props.listNotifications.length > 0 ? (
+                <>
                 <p style={{ display: "inline" }}>
                   Here is the list of notifications
                 </p>
@@ -65,9 +66,11 @@ export default class Notifications extends Component {
                       markAsRead={() => {this.markAsRead(notification.id)}}
                     />
                   ))}
-                </ul>
-              </>
-            ) : <p>No new notification for now</p>}
+                  </ul>
+                  </>
+                  ) : <p>No new notification for now</p>
+            }
+            </div>
           </div>
         )}
       </>
