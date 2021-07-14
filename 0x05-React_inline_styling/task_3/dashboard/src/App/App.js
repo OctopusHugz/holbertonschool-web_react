@@ -10,6 +10,10 @@ import PropTypes from "prop-types";
 import { getLatestNotification } from "../utils/utils";
 import { StyleSheet, css } from 'aphrodite';
 
+const marginLeftStyle = {
+	marginLeft: '2rem'
+}
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -71,7 +75,7 @@ export default class App extends Component {
             </BodySectionWithMarginBottom>
           )}
           <BodySection title="News from the School">
-            <p>Graduation date is September 17th!</p>
+            <p style={marginLeftStyle}>Graduation date is September 17th!</p>
           </BodySection>
           <hr className={css(styles.hrStyle)}/>
           <Footer className={css(styles.footerStyle)}/>
