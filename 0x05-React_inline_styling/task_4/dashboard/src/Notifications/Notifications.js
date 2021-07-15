@@ -29,18 +29,21 @@ export default class Notifications extends Component {
     return false;
   }
 
-  clickClose() {
-    console.log("Close button has been clicked");
-  }
+  clickClose() { console.log("Close button has been clicked"); }
 
-  markAsRead(id) {
-    console.log(`Notification ${id} has been marked as read`);
-  }
+  markAsRead(id) { console.log(`Notification ${id} has been marked as read`); }
+
+  shouldMenuBeHidden() { return this.props.displayDrawer ? true : false; }
 
   render() {
+    const menuItemClassName = css(
+      styles.menuItemStyle,
+      this.shouldMenuBeHidden() && styles.displayHidden
+    )
+
     return (
       <>
-        <div className="menuItem" className={css(styles.menuItemStyle)}>
+        <div className="menuItem" className={menuItemClassName}>
           Your notifications
         </div>
         {this.props.displayDrawer && (
@@ -142,5 +145,9 @@ const styles = StyleSheet.create({
   listStyle: {
     listStyle: "none",
     padding: 0,
+  },
+
+  displayHidden: {
+    display: 'none',
   },
 });
