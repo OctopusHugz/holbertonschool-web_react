@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import './Notifications.css';
 
 const NotificationItem = ({ type, html, value, markAsRead }) => {
 	return (

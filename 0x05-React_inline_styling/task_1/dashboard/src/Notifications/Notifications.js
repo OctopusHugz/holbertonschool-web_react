@@ -5,6 +5,11 @@ import PropTypes from "prop-types";
 import NotificationItemShape from "./NotificationItemShape";
 import { StyleSheet, css } from 'aphrodite';
 
+const menuItemStyle = {
+  display: 'flex',
+  justifyContent: 'flex-end',
+}
+
 
 export default class Notifications extends Component {
   constructor(props) {
@@ -39,7 +44,7 @@ export default class Notifications extends Component {
   render() {
     return (
       <>
-        <div className="menuItem">Your notifications</div>
+        <div className="menuItem" style={menuItemStyle}>Your notifications</div>
         {this.props.displayDrawer && (
           <div className={css(styles.notificationPanelStyle)}>
             <div className="Notifications">
