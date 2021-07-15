@@ -56,7 +56,7 @@ export default class App extends Component {
     ];
 
     return (
-      <div className={css(styles.bodyStyle)}>
+      <div className={css(styles.body)}>
         <Notifications listNotifications={listNotifications} />
         <div className="App">
           <Header />
@@ -74,7 +74,7 @@ export default class App extends Component {
             <p>Graduation date is September 17th!</p>
           </BodySection>
           <hr className={css(styles.hrStyle)}/>
-          <Footer className={css(styles.footerStyle)}/>
+          <Footer className={css(styles.footer)}/>
         </div>
       </div>
     );
@@ -82,7 +82,7 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
-  bodyStyle: {
+  body: {
     fontFamily: 'Arial, Helvetica, sans-serif'
   },
 
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E0344B'
   },
 
-  footerStyle: {
+  footer: {
     maxHeight: '10vh',
     display: 'flex',
     justifyContent: 'center',
