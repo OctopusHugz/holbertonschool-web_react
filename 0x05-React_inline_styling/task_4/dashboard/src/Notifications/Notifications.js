@@ -38,12 +38,12 @@ export default class Notifications extends Component {
   render() {
     const menuItemClassName = css(
       styles.menuItemStyle,
-      this.shouldMenuBeHidden() && styles.displayHidden
+      this.shouldMenuBeHidden() && styles.displayNone
     )
 
     return (
       <>
-        <div className="menuItem" className={menuItemClassName}>
+        <div className={`menuItem ${menuItemClassName}`}>
           Your notifications
         </div>
         {this.props.displayDrawer && (
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     padding: 0,
   },
 
-  displayHidden: {
+  displayNone: {
     display: 'none',
   },
 });
