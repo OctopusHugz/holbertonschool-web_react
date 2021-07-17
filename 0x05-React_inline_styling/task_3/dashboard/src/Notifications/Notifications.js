@@ -38,7 +38,7 @@ export default class Notifications extends Component {
   render() {
     return (
       <>
-        <div className="menuItem" className={css(styles.menuItemStyle)}>Your notifications</div>
+        <div className={`menuItem ${css(styles.menuItemStyle)}`}>Your notifications</div>
         {this.props.displayDrawer && (
           <div className={css(styles.notificationPanelStyle)}>
             <div className="Notifications">
