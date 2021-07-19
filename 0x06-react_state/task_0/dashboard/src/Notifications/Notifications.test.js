@@ -107,4 +107,22 @@ describe('<Notifications />', () => {
     expect(spy).toHaveReturnedWith(true);
     spy.mockRestore();
   });
+
+  it('verifies that clicking on the menu item calls handleDisplayDrawer', () => {
+    const mockHandleDisplayDrawer = jest.fn();
+    const wrapper = shallow(<Notifications listNotifications={listNotifications} handleDisplayDrawer={mockHandleDisplayDrawer} />);
+    const spy = jest.spyOn(wrapper.instance().props, 'handleDisplayDrawer');
+    wrapper.find('.menuItem').simulate('click');
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
+	});
+
+  it('verifies that clicking on the button calls handleHideDrawer', () => {
+    const mockHandleHideDrawer = jest.fn();
+    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} handleHideDrawer={mockHandleHideDrawer}/>);
+    const spy = jest.spyOn(wrapper.instance().props, 'handleHideDrawer');
+    wrapper.find('.Notifications button').simulate('click');
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
+	});
 });
