@@ -68,7 +68,7 @@ export default class App extends Component {
 
     return (
       <div className={css(styles.bodyStyle)}>
-        <Notifications listNotifications={listNotifications} displayDrawer={this.state.displayDrawer} onClick={this.state.displayDrawer ? this.handleHideDrawer : this.handleDisplayDrawer}/>
+        <Notifications listNotifications={listNotifications} displayDrawer={this.state.displayDrawer}/>
         <div className="App">
           <Header />
           <hr className={css(styles.hrStyle)}/>
