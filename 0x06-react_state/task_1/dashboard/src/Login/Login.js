@@ -1,53 +1,100 @@
-import React from "react";
-import { StyleSheet, css } from 'aphrodite';
+import React, { Component } from "react";
+import { StyleSheet, css } from "aphrodite";
 
-const Login = () => {
-  return (
-    <div className="App-login">
-      <div className={css(styles.loginStyle)}>
-        <p className={css(styles.loginPStyle)}>Login to access the full dashboard</p>
-        <form className={css(styles.loginFormStyle)}>
-          <label className={css(styles.smallLabel)}>
-            Email:
-            <input type="text" name="email" />
-          </label>
-          <label className={css(styles.smallLabel)}>
-            Password:
-            <input type="text" nam="password" />
-          </label>
-          <button>OK</button>
-        </form>
+export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+      email: "",
+      password: "",
+      enableSubmit: false,
+    };
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+  }
+
+  handleLoginSubmit(event) {
+    if (!this.state.enableSubmit) event.preventDefault();
+    this.setState({ isLoggedIn: true });
+  }
+
+  handleChangeEmail(event) {
+    this.setState({ email: event.target.value }, () => {
+      if (this.state.email !== "" && this.state.password !== "")
+        this.setState({ enableSubmit: true });
+    });
+  }
+
+  handleChangePassword(event) {
+    this.setState({ password: event.target.value }, () => {
+      if (this.state.email !== "" && this.state.password !== "")
+        this.setState({ enableSubmit: true });
+    });
+  }
+
+  render() {
+    return (
+      <div className="App-login">
+        <div className={css(styles.loginStyle)}>
+          <p className={css(styles.loginPStyle)}>
+            Login to access the full dashboard
+          </p>
+          <form
+            className={css(styles.loginFormStyle)}
+            onSubmit={this.handleLoginSubmit}
+          >
+            <label className={css(styles.smallLabel)}>
+              Email:
+              <input
+                type="text"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChangeEmail}
+              />
+            </label>
+            <label className={css(styles.smallLabel)}>
+              Password:
+              <input
+                type="text"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChangePassword}
+              />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   loginStyle: {
     minHeight: 150,
-    margin: '40px auto 150px auto',
-    '@media (max-width: 900px)': {
+    margin: "40px auto 150px auto",
+    "@media (max-width: 900px)": {
       minHeight: 0,
       margin: 0,
-    }
+    },
   },
 
   loginPStyle: {
-    margin: '3rem 0rem 0rem 2rem',
-    '@media (max-width: 900px)': {
+    margin: "3rem 0rem 0rem 2rem",
+    "@media (max-width: 900px)": {
       marginTop: 0,
-    }
+    },
   },
 
   loginFormStyle: {
-    margin: '1rem 0rem 2rem 2rem',
+    margin: "1rem 0rem 2rem 2rem",
   },
 
   smallLabel: {
-    '@media (max-width: 900px)': {
-        display: 'block',
-    }
-  }
-})
-
-export default Login;
+    "@media (max-width: 900px)": {
+      display: "block",
+    },
+  },
+});
