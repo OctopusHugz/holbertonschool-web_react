@@ -17,9 +17,9 @@ const marginLeftStyle = {
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { displayDrawer: false };
-    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this)
-    this.handleHideDrawer = this.handleHideDrawer.bind(this)
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
+    this.state = {displayDrawer: false};
   }
 
   static propTypes = {
@@ -68,7 +68,7 @@ export default class App extends Component {
 
     return (
       <div className={css(styles.bodyStyle)}>
-        <Notifications listNotifications={listNotifications} displayDrawer={this.state.displayDrawer}/>
+        <Notifications listNotifications={listNotifications} displayDrawer={this.state.displayDrawer} handleDisplayDrawer={this.handleDisplayDrawer} handleHideDrawer={this.handleHideDrawer}/>
         <div className="App">
           <Header />
           <hr className={css(styles.hrStyle)}/>
