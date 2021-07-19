@@ -15,8 +15,7 @@ export default class Login extends Component {
     this.handleChangePassword = this.handleChangePassword.bind(this);
   }
 
-  handleLoginSubmit(event) {
-    if (!this.state.enableSubmit) event.preventDefault();
+  handleLoginSubmit() {
     this.setState({ isLoggedIn: true });
   }
 
@@ -63,7 +62,7 @@ export default class Login extends Component {
                 onChange={this.handleChangePassword}
               />
             </label>
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Submit" disabled={!this.state.enableSubmit}/>
           </form>
         </div>
       </div>
