@@ -14,22 +14,25 @@ export default class Notifications extends Component {
   static propTypes = {
     displayDrawer: PropTypes.bool,
     listNotifications: PropTypes.arrayOf(NotificationItemShape),
+    handleDisplayDrawer: PropTypes.func,
+    handleHideDrawer: PropTypes.func,
   };
 
   static defaultProps = {
     displayDrawer: false,
     listNotifications: [],
+    handleDisplayDrawer: () => {},
+    handleHideDrawer: () => {},
   };
 
   shouldComponentUpdate(nextProps, nextState) {
     if (
-      nextProps.listNotifications.length > this.props.listNotifications.length
+      nextProps.listNotifications.length > this.props.listNotifications.length ||
+      nextProps.displayDrawer != this.props.displayDrawer
     )
       return true;
     return false;
   }
-
-  clickClose() { console.log("Close button has been clicked"); }
 
   markAsRead(id) { console.log(`Notification ${id} has been marked as read`); }
 
@@ -40,10 +43,9 @@ export default class Notifications extends Component {
       styles.menuItemStyle,
       this.shouldMenuBeHidden() && styles.displayNone
     )
-
     return (
       <>
-        <div className={`menuItem ${menuItemClassName}`}>
+        <div className={`menuItem ${menuItemClassName}`} onClick={this.props.handleDisplayDrawer}>
           Your notifications
         </div>
         {this.props.displayDrawer && (
@@ -57,7 +59,7 @@ export default class Notifications extends Component {
                   <button
                     style={{ float: "right" }}
                     aria-label="Close"
-                    onClick={this.clickClose}
+                    onClick={this.props.handleHideDrawer}
                   >
                     <img src={icon} alt="" style={{ height: "3vh" }} />
                   </button>
