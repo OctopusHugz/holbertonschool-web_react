@@ -15,7 +15,8 @@ export default class Login extends Component {
     this.handleChangePassword = this.handleChangePassword.bind(this);
   }
 
-  handleLoginSubmit() {
+  handleLoginSubmit(event) {
+    event.preventDefault();
     this.setState({ isLoggedIn: true });
   }
 
