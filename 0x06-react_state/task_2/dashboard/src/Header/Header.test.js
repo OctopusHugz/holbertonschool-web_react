@@ -5,7 +5,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Header from './Header';
 import { StyleSheetTestUtils } from 'aphrodite';
-import AppContext from '../App/AppContext';
+import { AppContext } from '../App/AppContext';
 
 StyleSheetTestUtils.suppressStyleInjection();
 

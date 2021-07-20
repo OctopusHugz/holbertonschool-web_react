@@ -8,7 +8,7 @@ import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import { getLatestNotification } from "../utils/utils";
 import { StyleSheet, css } from "aphrodite";
-import AppContext from "./AppContext";
+import { user as defaultUser, AppContext } from "./AppContext";
 
 const marginLeftStyle = {
   marginLeft: "2rem",
@@ -22,13 +22,9 @@ export default class App extends Component {
     this.logIn = this.logIn.bind(this);
     this.state = {
       displayDrawer: false,
-      user: {
-        email: "",
-        password: "",
-        isLoggedIn: false,
-      },
+      user: defaultUser,
       logOut: () => {
-        this.setState({ user: { email: "", password: "", isLoggedIn: false } });
+        this.setState({ user: defaultUser });
       },
     };
   }

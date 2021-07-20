@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from "../assets/holberton-logo.jpg";
 import { StyleSheet, css } from "aphrodite";
-import AppContext from "../App/AppContext";
+import { AppContext } from "../App/AppContext";
 
 export default class Header extends Component {
   render() {
