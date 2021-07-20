@@ -16,7 +16,6 @@ export default class Login extends Component {
 
   handleLoginSubmit(event) {
     event.preventDefault();
-    console.log(`this.props`, this.props)
     this.props.logIn(this.state.email, this.state.password);
   }
 
