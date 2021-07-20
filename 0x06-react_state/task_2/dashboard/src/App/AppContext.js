@@ -9,3 +9,4 @@ const user = {
 const logOut = () => {};
 
 const AppContext = createContext({ user, logOut });
+export default AppContext;
