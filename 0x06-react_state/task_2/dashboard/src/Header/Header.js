@@ -12,11 +12,11 @@ export default class Header extends Component {
           <img src={logo} className={css(styles.logoStyle)} alt="logo" />
           <h1 className={css(styles.titleStyle)}>School dashboard</h1>
         </header>
-        <section id="logoutSection">
-          {value.user.isLoggedIn && (
+        {value.user.isLoggedIn && (
+          <section id="logoutSection">
             <h1>Welcome {value.user.email} <a className={css(styles.italicText)} onClick={value.logOut}>(logout)</a></h1>
-          )}
         </section>
+          )}
       </>
     );
   }
