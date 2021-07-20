@@ -8,29 +8,30 @@ import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import PropTypes from "prop-types";
 import { getLatestNotification } from "../utils/utils";
-import { StyleSheet, css } from 'aphrodite';
+import { StyleSheet, css } from "aphrodite";
 
 const marginLeftStyle = {
-	marginLeft: '2rem'
-}
+  marginLeft: "2rem",
+};
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
-    this.state = {displayDrawer: false};
+    this.logIn = this.logIn.bind(this);
+    this.state = {
+      displayDrawer: false,
+      user: {
+        email: "",
+        password: "",
+        isLoggedIn: false,
+      },
+      logOut: () => {
+        this.setState({ user: { email: "", password: "", isLoggedIn: false } });
+      },
+    };
   }
-
-  static propTypes = {
-    isLoggedIn: PropTypes.bool,
-    logOut: PropTypes.func,
-  };
-
-  static defaultProps = {
-    isLoggedIn: false,
-    logOut: () => {},
-  };
 
   componentDidMount() {
     window.addEventListener("keydown", this.handleKeydown);
@@ -47,9 +48,17 @@ export default class App extends Component {
     }
   };
 
-  handleDisplayDrawer() { this.setState({displayDrawer: true}) }
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true });
+  }
 
-  handleHideDrawer() { this.setState({displayDrawer: false}) }
+  handleHideDrawer() {
+    this.setState({ displayDrawer: false });
+  }
+
+  logIn(email, password) {
+    this.setState({ user: { email, password, isLoggedIn: true } });
+  }
 
   render() {
     const listCourses = [
@@ -68,24 +77,29 @@ export default class App extends Component {
 
     return (
       <div className={css(styles.bodyStyle)}>
-        <Notifications listNotifications={listNotifications} displayDrawer={this.state.displayDrawer} handleDisplayDrawer={this.handleDisplayDrawer} handleHideDrawer={this.handleHideDrawer}/>
+        <Notifications
+          listNotifications={listNotifications}
+          displayDrawer={this.state.displayDrawer}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
+        />
         <div className="App">
           <Header />
-          <hr className={css(styles.hrStyle)}/>
-          {this.props.isLoggedIn ? (
+          <hr className={css(styles.hrStyle)} />
+          {this.state.user.isLoggedIn ? (
             <BodySectionWithMarginBottom title="Course list">
               <CourseList listCourses={listCourses} />
             </BodySectionWithMarginBottom>
           ) : (
             <BodySectionWithMarginBottom title="Log in to continue">
-              <Login />
+              <Login logIn={this.logIn} />
             </BodySectionWithMarginBottom>
           )}
           <BodySection title="News from the School">
             <p style={marginLeftStyle}>Graduation date is September 17th!</p>
           </BodySection>
-          <hr className={css(styles.hrStyle)}/>
-          <Footer className={css(styles.footerStyle)}/>
+          <hr className={css(styles.hrStyle)} />
+          <Footer className={css(styles.footerStyle)} />
         </div>
       </div>
     );
@@ -94,20 +108,20 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   bodyStyle: {
-    fontFamily: 'Arial, Helvetica, sans-serif'
+    fontFamily: "Arial, Helvetica, sans-serif",
   },
 
   hrStyle: {
-    margin: '0',
-    height: '.2rem',
-    backgroundColor: '#E0344B'
+    margin: "0",
+    height: ".2rem",
+    backgroundColor: "#E0344B",
   },
 
   footerStyle: {
-    maxHeight: '10vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontStyle: 'italic'
+    maxHeight: "10vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontStyle: "italic",
   },
-})
+});
