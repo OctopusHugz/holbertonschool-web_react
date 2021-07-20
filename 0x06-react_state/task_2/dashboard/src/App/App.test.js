@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-
 import React from "react";
 import { shallow, mount } from "enzyme";
 import App from "./App";
@@ -13,6 +12,8 @@ import CourseList from "../CourseList/CourseList";
 import { StyleSheetTestUtils } from 'aphrodite';
 
 StyleSheetTestUtils.suppressStyleInjection();
+
+const loggedInUser = { email: 'thedude@aim.com', password: 'thedudeabides', isLoggedIn: true };
 
 describe("<App />", () => {
   it("renders an <App /> component", () => {
@@ -46,7 +47,8 @@ describe("<App />", () => {
   });
 
   it("checks component behavior when isLoggedIn === true", () => {
-    const wrapper = shallow(<App isLoggedIn={true} />);
+    const wrapper = shallow(<App />);
+    wrapper.setState({ user: loggedInUser });
     expect(wrapper.find(Login)).toHaveLength(0);
     expect(wrapper.find(CourseList)).toHaveLength(1);
   });
@@ -58,14 +60,13 @@ describe("<App />", () => {
     });
     window.alert = jest.fn();
 
-    const testProps = {
-      logOut: jest.fn()
-    }
-
-    const wrapper = mount(<App isLoggedIn={true} {...testProps}/>);
+    const wrapper = mount(<App />);
+    wrapper.setState({ user: loggedInUser });
     map.keydown({ ctrlKey: true, key: "h" });
     expect(window.alert).toHaveBeenCalledWith("Logging you out");
-    expect(testProps.logOut).toHaveBeenCalled();
+    expect(wrapper.state().user.email).toBe('');
+    expect(wrapper.state().user.password).toBe('');
+    expect(wrapper.state().user.isLoggedIn).toBe(false);
     window.alert.mockRestore();
   });
 
@@ -85,5 +86,22 @@ describe("<App />", () => {
     wrapper.setState({ displayDrawer: true });
     wrapper.instance().handleHideDrawer();
     expect(wrapper.state().displayDrawer).toBe(false);
+  });
+
+  it("verifies that the logIn function updates the state correctly", () => {
+    const wrapper = shallow(<App />);
+    wrapper.instance().logIn(loggedInUser.email, loggedInUser.password);
+    expect(wrapper.state().user.email).toBe('thedude@aim.com');
+    expect(wrapper.state().user.password).toBe('thedudeabides');
+    expect(wrapper.state().user.isLoggedIn).toBe(true);
+  });
+
+  it("verifies that the logOut function updates the state correctly", () => {
+    const wrapper = shallow(<App />);
+    wrapper.setState({ user: loggedInUser });
+    wrapper.state().logOut();
+    expect(wrapper.state().user.email).toBe('');
+    expect(wrapper.state().user.password).toBe('');
+    expect(wrapper.state().user.isLoggedIn).toBe(false);
   });
 });
