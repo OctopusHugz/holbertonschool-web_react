@@ -6,9 +6,9 @@ import Header from "../Header/Header";
 import CourseList from "../CourseList/CourseList";
 import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
-import PropTypes from "prop-types";
 import { getLatestNotification } from "../utils/utils";
 import { StyleSheet, css } from "aphrodite";
+import AppContext from "./AppContext";
 
 const marginLeftStyle = {
   marginLeft: "2rem",
@@ -44,7 +44,7 @@ export default class App extends Component {
   handleKeydown = (event) => {
     if (event.ctrlKey && event.key === "h") {
       alert("Logging you out");
-      this.props.logOut();
+      this.state.logOut();
     }
   };
 
@@ -76,32 +76,34 @@ export default class App extends Component {
     ];
 
     return (
-      <div className={css(styles.bodyStyle)}>
-        <Notifications
-          listNotifications={listNotifications}
-          displayDrawer={this.state.displayDrawer}
-          handleDisplayDrawer={this.handleDisplayDrawer}
-          handleHideDrawer={this.handleHideDrawer}
-        />
-        <div className="App">
-          <Header />
-          <hr className={css(styles.hrStyle)} />
-          {this.state.user.isLoggedIn ? (
-            <BodySectionWithMarginBottom title="Course list">
-              <CourseList listCourses={listCourses} />
-            </BodySectionWithMarginBottom>
-          ) : (
-            <BodySectionWithMarginBottom title="Log in to continue">
-              <Login logIn={this.logIn} />
-            </BodySectionWithMarginBottom>
-          )}
-          <BodySection title="News from the School">
-            <p style={marginLeftStyle}>Graduation date is September 17th!</p>
-          </BodySection>
-          <hr className={css(styles.hrStyle)} />
-          <Footer className={css(styles.footerStyle)} />
+      <AppContext.Provider value={{user: this.state.user, logOut: this.state.logOut}}>
+        <div className={css(styles.bodyStyle)}>
+          <Notifications
+            listNotifications={listNotifications}
+            displayDrawer={this.state.displayDrawer}
+            handleDisplayDrawer={this.handleDisplayDrawer}
+            handleHideDrawer={this.handleHideDrawer}
+          />
+          <div className="App">
+            <Header />
+            <hr className={css(styles.hrStyle)} />
+            {this.state.user.isLoggedIn ? (
+              <BodySectionWithMarginBottom title="Course list">
+                <CourseList listCourses={listCourses} />
+              </BodySectionWithMarginBottom>
+            ) : (
+              <BodySectionWithMarginBottom title="Log in to continue">
+                <Login logIn={this.logIn} />
+              </BodySectionWithMarginBottom>
+            )}
+            <BodySection title="News from the School">
+              <p style={marginLeftStyle}>Graduation date is September 17th!</p>
+            </BodySection>
+            <hr className={css(styles.hrStyle)} />
+            <Footer className={css(styles.footerStyle)} />
+          </div>
         </div>
-      </div>
+      </AppContext.Provider>
     );
   }
 }
