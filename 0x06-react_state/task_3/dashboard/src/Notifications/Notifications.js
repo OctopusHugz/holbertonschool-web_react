@@ -1,21 +1,19 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import NotificationItem from "./NotificationItem";
 import icon from "../assets/close-icon.png";
 import PropTypes from "prop-types";
 import NotificationItemShape from "./NotificationItemShape";
 import { StyleSheet, css } from "aphrodite";
 
-export default class Notifications extends Component {
-  constructor(props) {
-    super(props);
-    this.markAsRead = this.markAsRead.bind(this);
-  }
+export default class Notifications extends PureComponent {
+  constructor(props) { super(props); }
 
   static propTypes = {
     displayDrawer: PropTypes.bool,
     listNotifications: PropTypes.arrayOf(NotificationItemShape),
     handleDisplayDrawer: PropTypes.func,
     handleHideDrawer: PropTypes.func,
+    markNotificationAsRead: PropTypes.func,
   };
 
   static defaultProps = {
@@ -23,18 +21,8 @@ export default class Notifications extends Component {
     listNotifications: [],
     handleDisplayDrawer: () => {},
     handleHideDrawer: () => {},
+    markNotificationAsRead: () => {},
   };
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (
-      nextProps.listNotifications.length > this.props.listNotifications.length ||
-      nextProps.displayDrawer != this.props.displayDrawer
-    )
-      return true;
-    return false;
-  }
-
-  markAsRead(id) { console.log(`Notification ${id} has been marked as read`); }
 
   shouldMenuBeHidden() { return this.props.displayDrawer ? true : false; }
 
@@ -70,8 +58,8 @@ export default class Notifications extends Component {
                         type={notification.type}
                         value={notification.value}
                         html={notification.html}
-                        markAsRead={() => {
-                          this.markAsRead(notification.id);
+                        markNotificationAsRead={() => {
+                          this.props.markNotificationAsRead(notification.id)
                         }}
                       />
                     ))}
