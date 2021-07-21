@@ -67,13 +67,16 @@ class App extends Component {
       { id: 3, type: "urgent", html: htmlObj },
     ];
 
+    const { displayDrawer } = this.state;
+    const { isLoggedIn } = this.props;
+
     return (
       <div className={css(styles.bodyStyle)}>
-        <Notifications listNotifications={listNotifications} displayDrawer={this.state.displayDrawer} handleDisplayDrawer={this.handleDisplayDrawer} handleHideDrawer={this.handleHideDrawer}/>
+        <Notifications listNotifications={listNotifications} displayDrawer={displayDrawer} handleDisplayDrawer={this.handleDisplayDrawer} handleHideDrawer={this.handleHideDrawer}/>
         <div className="App">
           <Header />
           <hr className={css(styles.hrStyle)}/>
-          {this.props.isLoggedIn ? (
+          {isLoggedIn ? (
             <BodySectionWithMarginBottom title="Course list">
               <CourseList listCourses={listCourses} />
             </BodySectionWithMarginBottom>
