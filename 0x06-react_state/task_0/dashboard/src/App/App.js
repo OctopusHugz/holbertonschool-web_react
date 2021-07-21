@@ -17,6 +17,7 @@ const marginLeftStyle = {
 export default class App extends Component {
   constructor(props) {
     super(props);
+    this.handleKeydown = this.handleKeydown.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.state = {
@@ -42,7 +43,7 @@ export default class App extends Component {
     window.removeEventListener("keydown", this.handleKeydown);
   }
 
-  handleKeydown = (event) => {
+  handleKeydown(event) {
     if (event.ctrlKey && event.key === "h") {
       alert("Logging you out");
       this.props.logOut();
