@@ -14,7 +14,7 @@ const marginLeftStyle = {
 	marginLeft: '2rem'
 }
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.handleKeydown = this.handleKeydown.bind(this);
@@ -23,15 +23,15 @@ class App extends Component {
     this.state = { displayDrawer: false };
   }
 
-  // static propTypes = {
-  //   isLoggedIn: PropTypes.bool,
-  //   logOut: PropTypes.func,
-  // };
+  static propTypes = {
+    isLoggedIn: PropTypes.bool,
+    logOut: PropTypes.func,
+  };
 
-  // static defaultProps = {
-  //   isLoggedIn: false,
-  //   logOut: () => {},
-  // };
+  static defaultProps = {
+    isLoggedIn: false,
+    logOut: () => {},
+  };
 
   componentDidMount() {
     window.addEventListener("keydown", this.handleKeydown);
@@ -96,16 +96,6 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  isLoggedIn: PropTypes.bool,
-  logOut: PropTypes.func,
-};
-
-App.defaultProps = {
-  isLoggedIn: false,
-  logOut: () => {},
-};
-
 const styles = StyleSheet.create({
   bodyStyle: {
     fontFamily: 'Arial, Helvetica, sans-serif'
@@ -125,5 +115,3 @@ const styles = StyleSheet.create({
     fontStyle: 'italic'
   },
 })
-
-export default App;

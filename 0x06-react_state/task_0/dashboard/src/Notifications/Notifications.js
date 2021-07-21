@@ -11,19 +11,19 @@ export default class Notifications extends Component {
     this.markAsRead = this.markAsRead.bind(this);
   }
 
-  // static propTypes = {
-  //   displayDrawer: PropTypes.bool,
-  //   listNotifications: PropTypes.arrayOf(NotificationItemShape),
-  //   handleDisplayDrawer: PropTypes.func,
-  //   handleHideDrawer: PropTypes.func,
-  // };
+  static propTypes = {
+    displayDrawer: PropTypes.bool,
+    listNotifications: PropTypes.arrayOf(NotificationItemShape),
+    handleDisplayDrawer: PropTypes.func,
+    handleHideDrawer: PropTypes.func,
+  };
 
-  // static defaultProps = {
-  //   displayDrawer: false,
-  //   listNotifications: [],
-  //   handleDisplayDrawer: () => {},
-  //   handleHideDrawer: () => {},
-  // };
+  static defaultProps = {
+    displayDrawer: false,
+    listNotifications: [],
+    handleDisplayDrawer: () => {},
+    handleHideDrawer: () => {},
+  };
 
   shouldComponentUpdate(nextProps, nextState) {
     if (
@@ -88,20 +88,6 @@ export default class Notifications extends Component {
     );
   }
 }
-
-Notifications.propTypes = {
-  displayDrawer: PropTypes.bool,
-  listNotifications: PropTypes.arrayOf(NotificationItemShape),
-  handleDisplayDrawer: PropTypes.func,
-  handleHideDrawer: PropTypes.func,
-};
-
-Notifications.defaultProps = {
-  displayDrawer: false,
-  listNotifications: [],
-  handleDisplayDrawer: () => {},
-  handleHideDrawer: () => {},
-};
 
 const opacityKeyframes = {
   from: {
