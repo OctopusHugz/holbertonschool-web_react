@@ -19,7 +19,9 @@ export default class App extends Component {
     super(props);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
-    this.state = { displayDrawer: false };
+    this.state = {
+      displayDrawer: false
+    };
   }
 
   static propTypes = {
@@ -47,9 +49,13 @@ export default class App extends Component {
     }
   };
 
-  handleDisplayDrawer() { this.setState({ displayDrawer: true }) }
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true })
+  }
 
-  handleHideDrawer() { this.setState({ displayDrawer: false }) }
+  handleHideDrawer() {
+    this.setState({ displayDrawer: false })
+  }
 
   render() {
     const listCourses = [
