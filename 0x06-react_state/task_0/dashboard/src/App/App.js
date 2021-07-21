@@ -14,7 +14,7 @@ const marginLeftStyle = {
 	marginLeft: '2rem'
 }
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.handleKeydown = this.handleKeydown.bind(this);
@@ -122,3 +122,5 @@ const styles = StyleSheet.create({
     fontStyle: 'italic'
   },
 })
+
+export default App;
