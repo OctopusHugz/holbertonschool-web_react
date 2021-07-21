@@ -11,19 +11,19 @@ export default class Notifications extends Component {
     this.markAsRead = this.markAsRead.bind(this);
   }
 
-  static propTypes = {
-    displayDrawer: PropTypes.bool,
-    listNotifications: PropTypes.arrayOf(NotificationItemShape),
-    handleDisplayDrawer: PropTypes.func,
-    handleHideDrawer: PropTypes.func,
-  };
+  // static propTypes = {
+  //   displayDrawer: PropTypes.bool,
+  //   listNotifications: PropTypes.arrayOf(NotificationItemShape),
+  //   handleDisplayDrawer: PropTypes.func,
+  //   handleHideDrawer: PropTypes.func,
+  // };
 
-  static defaultProps = {
-    displayDrawer: false,
-    listNotifications: [],
-    handleDisplayDrawer: () => {},
-    handleHideDrawer: () => {},
-  };
+  // static defaultProps = {
+  //   displayDrawer: false,
+  //   listNotifications: [],
+  //   handleDisplayDrawer: () => {},
+  //   handleHideDrawer: () => {},
+  // };
 
   shouldComponentUpdate(nextProps, nextState) {
     if (
@@ -43,15 +43,16 @@ export default class Notifications extends Component {
       styles.menuItemStyle,
       this.shouldMenuBeHidden() && styles.displayNone
     )
+    const { displayDrawer, handleDisplayDrawer, handleHideDrawer, listNotifications } = this.props;
     return (
       <>
-        <div className={`menuItem ${menuItemClassName}`} onClick={this.props.handleDisplayDrawer}>
+        <div className={`menuItem ${menuItemClassName}`} onClick={handleDisplayDrawer}>
           Your notifications
         </div>
-        {this.props.displayDrawer && (
+        {displayDrawer && (
           <div className={css(styles.notificationPanelStyle)}>
             <div className="Notifications">
-              {this.props.listNotifications.length > 0 ? (
+              {listNotifications.length > 0 ? (
                 <>
                   <p style={{ display: "inline" }}>
                     Here is the list of notifications
@@ -59,7 +60,7 @@ export default class Notifications extends Component {
                   <button
                     style={{ float: "right" }}
                     aria-label="Close"
-                    onClick={this.props.handleHideDrawer}
+                    onClick={handleHideDrawer}
                   >
                     <img src={icon} alt="" style={{ height: "3vh" }} />
                   </button>
@@ -87,6 +88,20 @@ export default class Notifications extends Component {
     );
   }
 }
+
+Notifications.propTypes = {
+  displayDrawer: PropTypes.bool,
+  listNotifications: PropTypes.arrayOf(NotificationItemShape),
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
+};
+
+Notifications.defaultProps = {
+  displayDrawer: false,
+  listNotifications: [],
+  handleDisplayDrawer: () => {},
+  handleHideDrawer: () => {},
+};
 
 const opacityKeyframes = {
   from: {
