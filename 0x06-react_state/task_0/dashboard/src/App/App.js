@@ -20,20 +20,18 @@ export default class App extends Component {
     this.handleKeydown = this.handleKeydown.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
-    this.state = {
-      displayDrawer: false
-    };
+    this.state = { displayDrawer: false };
   }
 
-  static propTypes = {
-    isLoggedIn: PropTypes.bool,
-    logOut: PropTypes.func,
-  };
+  // static propTypes = {
+  //   isLoggedIn: PropTypes.bool,
+  //   logOut: PropTypes.func,
+  // };
 
-  static defaultProps = {
-    isLoggedIn: false,
-    logOut: () => {},
-  };
+  // static defaultProps = {
+  //   isLoggedIn: false,
+  //   logOut: () => {},
+  // };
 
   componentDidMount() {
     window.addEventListener("keydown", this.handleKeydown);
@@ -50,17 +48,9 @@ export default class App extends Component {
     }
   };
 
-  handleDisplayDrawer() {
-    this.setState({
-      displayDrawer: true
-    });
-  }
+  handleDisplayDrawer() { this.setState({ displayDrawer: true }); }
 
-  handleHideDrawer() {
-    this.setState({
-      displayDrawer: false
-    });
-  }
+  handleHideDrawer() { this.setState({ displayDrawer: false }); }
 
   render() {
     const listCourses = [
@@ -102,6 +92,16 @@ export default class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  logOut: PropTypes.func,
+};
+
+App.defaultProps = {
+  isLoggedIn: false,
+  logOut: () => {},
+};
 
 const styles = StyleSheet.create({
   bodyStyle: {
