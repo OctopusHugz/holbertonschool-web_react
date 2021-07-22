@@ -10,7 +10,7 @@ module.exports = {
 	},
 	mode: 'development',
 	devServer: {
-		contentBase: path.resolve('../dist/'),
+		contentBase: path.resolve(__dirname, '../dist/'),
 		compress: true,
 		port: 8564,
 		hot: true,
