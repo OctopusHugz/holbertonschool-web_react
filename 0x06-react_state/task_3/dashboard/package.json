@@ -34,7 +34,7 @@
   "scripts": {
     "build": "webpack -c ./config/webpack.config.js",
     "start-dev": "webpack serve --mode development -c ./config/webpack.config.js --open",
-    "start": "webpack-dev-server --mode development --config config/webpack.config.js",
+    "start": "webpack serve --mode development -c ./config/webpack.config.js --open",
     "test": "jest",
     "test-watch": "jest --watch"
   },
