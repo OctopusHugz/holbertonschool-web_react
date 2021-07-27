@@ -1,4 +1,5 @@
-const { getIn } = require("immutable");
-module.exports = function accessImmutableObject (object, array) {
+import { getIn } from 'immutable';
+
+export default function accessImmutableObject(object, array) {
   return getIn(object, array);
-};
+}
