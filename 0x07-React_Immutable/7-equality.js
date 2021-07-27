@@ -1,3 +1,4 @@
-const { is } = require('immutable');
+import { is } from 'immutable';
 
-module.exports = areMapsEqual = (map1, map2) => { return is(map1, map2); }
+const areMapsEqual = (map1, map2) => is(map1, map2);
+export default areMapsEqual;
