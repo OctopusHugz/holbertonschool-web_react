@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
 
 export default function accessImmutableObject(object, array) {
-  return Map.getIn(object.fromJS(), array);
+  return Map.getIn(object, array);
 }
