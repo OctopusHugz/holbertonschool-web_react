@@ -8,7 +8,9 @@ const map = Map({
   5: 'Jacob',
   6: 'Lucas',
 });
-const map2 = List(map).set(2, 'Benjamin').set(4, 'Oliver');
+const map2 = List(map).withMutations((list) => {
+  list.set(2, 'Benjamin').set(4, 'Oliver');
+});
 
 // Adding other possibilities since task requirement is so vague
 
