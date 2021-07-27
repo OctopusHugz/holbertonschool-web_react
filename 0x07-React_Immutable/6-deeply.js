@@ -1,5 +1,4 @@
-const { Map } = require("immutable");
+import { Map } from 'immutable';
 
-module.exports = mergeDeeplyElements = (page1, page2) => {
-  return Map(page1).mergeDeep(Map(page2));
-};
+const mergeDeeplyElements = (page1, page2) => Map(page1).mergeDeep(Map(page2));
+export default mergeDeeplyElements;
