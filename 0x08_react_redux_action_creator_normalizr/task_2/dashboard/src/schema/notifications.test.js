@@ -83,6 +83,5 @@ describe("notifications", () => {
         "5debd7642e815cd350407777"
       ];
     expect(result).toEqual(expected);
-    console.log(`normalizedNotifications.entities`, normalizedNotifications.entities)
   });
 });

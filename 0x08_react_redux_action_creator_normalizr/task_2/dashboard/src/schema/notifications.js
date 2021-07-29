@@ -11,9 +11,16 @@ const mySchema = [notification];
 const normalizedNotifications = normalize(notifications, mySchema);
 
 function getAllNotificationsByUser(userId) {
-  return notifications
-    .filter((notification) => notification.author.id === userId)
-    .map((notification) => notification.context);
+  const result = [];
+  const notificationsObj = normalizedNotifications.entities.notifications;
+  const messagesObj = normalizedNotifications.entities.messages;
+  for (const notificationId in notificationsObj) {
+    if (notificationsObj[notificationId].author === userId) {
+      const contextId = notificationsObj[notificationId].context;
+      result.push(messagesObj[contextId]);
+    }
+  }
+  return result;
 }
 
 export { normalizedNotifications, getAllNotificationsByUser };
