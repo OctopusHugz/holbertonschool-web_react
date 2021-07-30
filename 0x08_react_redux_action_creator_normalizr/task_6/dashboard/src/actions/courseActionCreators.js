@@ -1,17 +1,18 @@
-import { SELECT_COURSE, UNSELECT_COURSE } from './courseActionTypes';
+import { SELECT_COURSE, UNSELECT_COURSE } from "./courseActionTypes";
 
-function selectCourse(index) {
-	return {
-		type: SELECT_COURSE,
-		index,
-	}
+export function selectCourse(index) {
+  return {
+    type: SELECT_COURSE,
+    index,
+  };
 }
 
-function unSelectCourse(index) {
-	return {
-		type: UNSELECT_COURSE,
-		index,
-	}
+export function unSelectCourse(index) {
+  return {
+    type: UNSELECT_COURSE,
+    index,
+  };
 }
 
-export { selectCourse, unSelectCourse };
+// bound the selectCourse action creator
+// bound the unSelectCourse action creator

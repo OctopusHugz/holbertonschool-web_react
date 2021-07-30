@@ -5,29 +5,32 @@ import {
   HIDE_NOTIFICATION_DRAWER,
 } from "./uiActionTypes";
 
-function login(email, password) {
+export function login(email, password) {
   return {
     type: LOGIN,
     user: { email, password },
   };
 }
 
-function logout() {
+export function logout() {
   return {
     type: LOGOUT,
   };
 }
 
-function displayNotificationDrawer() {
+export function displayNotificationDrawer() {
   return {
     type: DISPLAY_NOTIFICATION_DRAWER,
   };
 }
 
-function hideNotificationDrawer() {
+export function hideNotificationDrawer() {
   return {
     type: HIDE_NOTIFICATION_DRAWER,
   };
 }
 
-export { login, logout, displayNotificationDrawer, hideNotificationDrawer };
+// bound the login action creator
+// bound the logout action creator
+// bound the displayNotificationDrawer action creator
+// bound the hideNotificationDrawer action creator
