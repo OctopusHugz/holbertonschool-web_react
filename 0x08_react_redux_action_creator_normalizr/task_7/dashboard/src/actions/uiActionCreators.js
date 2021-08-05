@@ -52,8 +52,7 @@ export function loginRequest(email, password) {
     dispatch(login(email, password));
     return (
       // the function should fetch the API /login-success.json
-      // server must be running for this to work
-      fetch("http://localhost:8564/login-success.json")
+      fetch("/login-success.json")
         // if it succeeds, dispatch the loginSuccess action
         .then(() => dispatch(loginSuccess()))
         // if the API fails, dispatch the loginFailure action

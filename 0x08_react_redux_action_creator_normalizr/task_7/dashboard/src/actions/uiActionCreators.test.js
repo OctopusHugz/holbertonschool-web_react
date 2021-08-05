@@ -56,7 +56,7 @@ describe("uiActions", () => {
 
 describe("loginRequest", () => {
   it("should verify store received LOGIN and LOGIN_SUCCESS actions", () => {
-    fetchMock.get("http://localhost:8564/login-success.json", 200);
+    fetchMock.get("/login-success.json", 200);
     return store.dispatch(loginRequest(user.email, user.password)).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual(login(user.email, user.password));
@@ -66,7 +66,7 @@ describe("loginRequest", () => {
 
   it("should verify store received LOGIN and LOGIN_FAILURE actions", () => {
     fetchMock.get(
-      "http://localhost:8564/login-success.json",
+      "/login-success.json",
       { throws: new Error("fetch failed") },
       {
         overwriteRoutes: true,
