@@ -15,7 +15,6 @@ import {
 } from "./uiActionCreators";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-// import fetchMock from "fetch-mock-jest";
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
