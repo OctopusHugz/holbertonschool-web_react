@@ -7,13 +7,6 @@ import {
   LOGIN_FAILURE,
 } from "./uiActionTypes";
 import fetch from "node-fetch";
-import path from "path";
-
-const urlPath = path.join(process.cwd(), "../../dist", "login-success.json");
-// import { createStore, applyMiddleware } from "redux";
-// import thunk from "redux-thunk";
-
-// const store = createStore(() => {}, applyMiddleware(thunk));
 
 export function login(email, password) {
   return {
@@ -68,15 +61,3 @@ export function loginRequest(email, password) {
     );
   };
 }
-
-// export function loginRequest(email, password) {
-//   // the function should dispatch the login action
-//   // using the action creator previously created
-//   store.dispatch(login(email, password));
-//   // the function should fetch the API /login-success.json
-//   fetch("/login-success.json")
-//     // if it succeeds, dispatch the loginSuccess action
-//     .then(() => store.dispatch(loginSuccess()))
-//     // if the API fails, dispatch the loginFailure action
-//     .catch(() => store.dispatch(loginFailure()));
-// }
