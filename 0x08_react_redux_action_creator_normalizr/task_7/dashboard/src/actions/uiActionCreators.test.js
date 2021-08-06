@@ -23,7 +23,7 @@ const user = {
   email: "dude@lebowski.com",
   password: "thatrugtiedtheroomtogether",
 };
-jest.mock("node-fetch", () => require("fetch-mock-jest").sandbox());
+jest.mock("node-fetch", () => require("fetch-mock").sandbox());
 const fetchMock = require("node-fetch");
 
 describe("uiActions", () => {
