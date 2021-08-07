@@ -54,10 +54,17 @@ describe("courseReducer", () => {
   });
 
   it("should return data from FETCH_COURSE_SUCCESS with isSelected === false", () => {
-    // This comment is using the Action Creator, task is unclear here:
-    // const fetchCourseSuccessAction = fetchCourseSuccess();
+    // Task is unclear if we should use action creator for FETCH_COURSE_SUCCESS
+    // So I tested using both const fetchCourseSuccessAction in courseReducer
+    // And using the fetchCourseSuccess action creator
+    const fetchCourseSuccessActionFromCreator = fetchCourseSuccess();
     const newState = courseReducer([], fetchCourseSuccessAction);
     expect(newState).toEqual(courseList);
+    const secondNewState = courseReducer(
+      [],
+      fetchCourseSuccessActionFromCreator
+    );
+    expect(secondNewState).toEqual(courseList);
   });
 
   it("should returns the data with the right course property isSelected === true for SELECT_COURSE", () => {
