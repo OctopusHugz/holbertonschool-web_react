@@ -1,4 +1,26 @@
-import { SELECT_COURSE, UNSELECT_COURSE } from "./courseActionTypes";
+import {
+  SELECT_COURSE,
+  UNSELECT_COURSE,
+  FETCH_COURSE_SUCCESS,
+} from "./courseActionTypes";
+
+const courseList = [
+  {
+    id: 1,
+    name: "ES6",
+    credit: 60,
+  },
+  {
+    id: 2,
+    name: "Webpack",
+    credit: 20,
+  },
+  {
+    id: 3,
+    name: "React",
+    credit: 40,
+  },
+];
 
 export function selectCourse(index) {
   return {
@@ -14,5 +36,9 @@ export function unSelectCourse(index) {
   };
 }
 
-// bound the selectCourse action creator
-// bound the unSelectCourse action creator
+export function fetchCourseSuccess() {
+  return {
+    type: FETCH_COURSE_SUCCESS,
+    data: courseList,
+  };
+}
