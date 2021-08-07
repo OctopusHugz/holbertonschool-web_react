@@ -49,7 +49,7 @@ const selectedCourseList = [
 
 describe("courseReducer", () => {
   it("should return an empty array for the default state", () => {
-    const newState = courseReducer([], "");
+    const newState = courseReducer(undefined, "");
     expect(newState).toEqual([]);
   });
 
