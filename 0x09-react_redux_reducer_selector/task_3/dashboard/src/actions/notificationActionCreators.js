@@ -1,4 +1,26 @@
-import { MARK_AS_READ, SET_TYPE_FILTER } from "./notificationActionTypes";
+import {
+  MARK_AS_READ,
+  SET_TYPE_FILTER,
+  FETCH_NOTIFICATIONS_SUCCESS,
+} from "./notificationActionTypes";
+
+const notificationsList = [
+  {
+    id: 1,
+    type: "default",
+    value: "New course available",
+  },
+  {
+    id: 2,
+    type: "urgent",
+    value: "New resume available",
+  },
+  {
+    id: 3,
+    type: "urgent",
+    value: "New data available",
+  },
+];
 
 export function markAsAread(index) {
   return {
@@ -14,5 +36,9 @@ export function setNotificationFilter(filter) {
   };
 }
 
-// bound the markAsAread action creator
-// bound the setNotificationFilter action creator
+export function fetchNotificationsSuccess() {
+  return {
+    type: FETCH_NOTIFICATIONS_SUCCESS,
+    data: notificationsList,
+  };
+}
