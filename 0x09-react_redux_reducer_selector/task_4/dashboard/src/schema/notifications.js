@@ -23,4 +23,12 @@ function getAllNotificationsByUser(userId) {
   return result;
 }
 
-export { normalizedNotifications, getAllNotificationsByUser };
+function notificationsNormalizer(data) {
+  return normalize(data, mySchema);
+}
+
+export {
+  normalizedNotifications,
+  getAllNotificationsByUser,
+  notificationsNormalizer,
+};
