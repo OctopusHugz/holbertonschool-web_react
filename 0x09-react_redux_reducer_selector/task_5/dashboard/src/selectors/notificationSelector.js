@@ -9,12 +9,9 @@ const getNotifications = (state) => {
     "entities",
     "notifications",
   ]);
-  console.log(`notifications`, notifications);
   return Map(notifications);
 };
 
-// Create another selector for the notifications named getUnreadNotifications,
-// that will return the list of unread notifications in a Map format
 const getUnreadNotifications = (state) => {
   const unreadNotifications = [];
   const notificationsObj = state.getIn([
@@ -22,7 +19,6 @@ const getUnreadNotifications = (state) => {
     "entities",
     "notifications",
   ]);
-  // .toJS();
   for (const notificationId in notificationsObj) {
     if (notificationsObj[notificationId].isRead === false) {
       unreadNotifications.push(notificationsObj[notificationId]);

@@ -7,7 +7,7 @@ import {
   getNotifications,
   getUnreadNotifications,
 } from "./notificationSelector";
-import { Map, fromJS } from "immutable";
+import { Map } from "immutable";
 import { notificationsNormalizer } from "../schema/notifications";
 import { markAsAread } from "../actions/notificationActionCreators";
 
@@ -15,7 +15,6 @@ const initialState = notificationReducer(
   Map(),
   fetchNotificationsSuccessAction
 );
-
 const notifications = [
   {
     id: 1,
@@ -36,45 +35,12 @@ const notifications = [
     value: "New data available",
   },
 ];
-
 const normalizedNotifications = notificationsNormalizer(notifications);
-
-// const readNotificationState = {
-//   filter: "DEFAULT",
-//   notifications: [
-//     {
-//       id: 1,
-//       isRead: false,
-//       type: "default",
-//       value: "New course available",
-//     },
-//     {
-//       id: 2,
-//       isRead: true,
-//       type: "urgent",
-//       value: "New resume available",
-//     },
-//     {
-//       id: 3,
-//       isRead: false,
-//       type: "urgent",
-//       value: "New data available",
-//     },
-//   ],
-// };
-
 const markAsReadAction = markAsAread(2);
-
 const readNotificationState = notificationReducer(
   initialState,
   markAsReadAction
 );
-
-// const readNormalizedNotifications = {
-//   ...readNotificationState,
-//   notifications: notificationsNormalizer(readNotificationState.notifications),
-// };
-
 const unreadNotifications = [
   {
     id: 1,
@@ -89,7 +55,6 @@ const unreadNotifications = [
     value: "New data available",
   },
 ];
-
 const normalizedUnreadNotifications =
   notificationsNormalizer(unreadNotifications);
 
@@ -111,9 +76,5 @@ describe("notificationSelector", () => {
     expect(result.toJS()).toEqual(
       normalizedUnreadNotifications.entities.notifications
     );
-    // const result = getUnreadNotifications(fromJS(readNormalizedNotifications));
-    // expect(result.toJS()).toEqual(
-    //   normalizedUnreadNotifications.entities.notifications
-    // );
   });
 });
