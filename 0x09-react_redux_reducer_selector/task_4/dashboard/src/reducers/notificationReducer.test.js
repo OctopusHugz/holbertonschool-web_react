@@ -1,8 +1,10 @@
+import { fromJS, Map } from "immutable";
 import {
   fetchNotificationsSuccess,
   markAsAread,
   setNotificationFilter,
 } from "../actions/notificationActionCreators";
+import { notificationsNormalizer } from "../schema/notifications";
 import {
   notificationReducer,
   fetchNotificationsSuccessAction,
@@ -32,6 +34,11 @@ const defaultState = {
   ],
 };
 
+const normalizedNotifications = {
+  ...defaultState,
+  notifications: notificationsNormalizer(defaultState.notifications),
+};
+
 const readNotificationState = {
   filter: "DEFAULT",
   notifications: [
@@ -54,6 +61,11 @@ const readNotificationState = {
       value: "New data available",
     },
   ],
+};
+
+const readNormalizedNotifications = {
+  ...readNotificationState,
+  notifications: notificationsNormalizer(readNotificationState.notifications),
 };
 
 const urgentFilterState = {
@@ -80,13 +92,15 @@ const urgentFilterState = {
   ],
 };
 
+const urgentNormalizedNotifications = {
+  ...urgentFilterState,
+  notifications: notificationsNormalizer(urgentFilterState.notifications),
+};
+
 describe("notificationReducer", () => {
   it("should return the initial state for the default case", () => {
-    const newState = notificationReducer(undefined, "");
-    expect(newState).toEqual({
-      filter: "DEFAULT",
-      notifications: [],
-    });
+    const newState = notificationReducer(Map(), "");
+    expect(newState).toEqual(Map());
   });
 
   it("should return data from FETCH_NOTIFICATIONS_SUCCESS", () => {
@@ -98,29 +112,32 @@ describe("notificationReducer", () => {
     const fetchNotificationsSuccessActionFromCreator =
       fetchNotificationsSuccess();
     const newState = notificationReducer(
-      undefined,
+      Map(),
       fetchNotificationsSuccessAction
     );
-    expect(newState).toEqual(defaultState);
+    expect(newState.toJS()).toEqual(normalizedNotifications);
     const secondNewState = notificationReducer(
-      undefined,
+      Map(),
       fetchNotificationsSuccessActionFromCreator
     );
-    expect(secondNewState).toEqual(defaultState);
+    expect(secondNewState.toJS()).toEqual(normalizedNotifications);
   });
 
   it("should return the data with the right course property isRead === true for MARK_AS_READ", () => {
     const markAsReadAction = markAsAread(2);
-    const newState = notificationReducer(defaultState, markAsReadAction);
-    expect(newState).toEqual(readNotificationState);
+    const newState = notificationReducer(
+      fromJS(normalizedNotifications),
+      markAsReadAction
+    );
+    expect(newState.toJS()).toEqual(readNormalizedNotifications);
   });
 
   it("should return the data with the right course property filter === 'URGENT' type for SET_TYPE_FILTER", () => {
     const setNotificationFilterAction = setNotificationFilter("URGENT");
     const newState = notificationReducer(
-      defaultState,
+      fromJS(normalizedNotifications),
       setNotificationFilterAction
     );
-    expect(newState).toEqual(urgentFilterState);
+    expect(newState.toJS()).toEqual(urgentNormalizedNotifications);
   });
 });
