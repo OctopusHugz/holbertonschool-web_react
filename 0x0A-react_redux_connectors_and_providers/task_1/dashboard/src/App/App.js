@@ -13,6 +13,7 @@ import {
   displayNotificationDrawer,
   hideNotificationDrawer,
 } from "../actions/uiActionCreators";
+import PropTypes from "prop-types";
 
 const marginLeftStyle = {
   marginLeft: "2rem",
@@ -25,12 +26,9 @@ const htmlObj = {
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
-    this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.logIn = this.logIn.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.state = {
-      displayDrawer: false,
       user: defaultUser,
       logOut: () => {
         this.setState({ user: defaultUser });
@@ -57,14 +55,6 @@ export default class App extends Component {
       this.state.logOut();
     }
   };
-
-  handleDisplayDrawer() {
-    this.setState({ displayDrawer: true });
-  }
-
-  handleHideDrawer() {
-    this.setState({ displayDrawer: false });
-  }
 
   logIn(email, password) {
     this.setState({ user: { email, password, isLoggedIn: true } });
@@ -139,6 +129,19 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 });
+
+App.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  displayDrawer: PropTypes.bool,
+  displayNotificationDrawer: PropTypes.func,
+  hideNotificationDrawer: PropTypes.func,
+};
+App.defaultProps = {
+  isLoggedIn: false,
+  displayDrawer: false,
+  displayNotificationDrawer: () => {},
+  hideNotificationDrawer: () => {},
+};
 
 const mapStateToProps = (state) => ({
   isLoggedIn: state.toJS().isUserLoggedIn,
