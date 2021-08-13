@@ -88,7 +88,7 @@ export default class App extends Component {
         <div className={css(styles.bodyStyle)}>
           <Notifications
             listNotifications={this.state.listNotifications}
-            displayDrawer={this.state.displayDrawer}
+            displayDrawer={this.props.displayDrawer}
             handleDisplayDrawer={this.handleDisplayDrawer}
             handleHideDrawer={this.handleHideDrawer}
             markNotificationAsRead={this.markNotificationAsRead}
