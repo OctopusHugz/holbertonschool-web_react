@@ -125,7 +125,9 @@ describe("<App />", () => {
       { id: 3, type: "urgent", value: "New majors available" },
     ]);
   });
+});
 
+describe("Redux tests", () => {
   it("verifies mapStateToProps returns the right object for isUserLoggedIn", () => {
     const state = fromJS({ isUserLoggedIn: true });
     const result = mapStateToProps(state);
