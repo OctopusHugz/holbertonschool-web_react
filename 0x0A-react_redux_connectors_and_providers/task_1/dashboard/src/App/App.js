@@ -9,7 +9,10 @@ import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBot
 import { getLatestNotification } from "../utils/utils";
 import { StyleSheet, css } from "aphrodite";
 import { user as defaultUser, AppContext } from "./AppContext";
-import { connect } from "react-redux";
+import {
+  displayNotificationDrawer,
+  hideNotificationDrawer,
+} from "../actions/uiActionCreators";
 
 const marginLeftStyle = {
   marginLeft: "2rem",
@@ -89,8 +92,8 @@ export default class App extends Component {
           <Notifications
             listNotifications={this.state.listNotifications}
             displayDrawer={this.props.displayDrawer}
-            handleDisplayDrawer={this.handleDisplayDrawer}
-            handleHideDrawer={this.handleHideDrawer}
+            handleDisplayDrawer={this.props.displayNotificationDrawer}
+            handleHideDrawer={this.props.hideNotificationDrawer}
             markNotificationAsRead={this.markNotificationAsRead}
           />
           <div className="App">
@@ -141,5 +144,12 @@ const mapStateToProps = (state) => ({
   isLoggedIn: state.toJS().isUserLoggedIn,
   displayDrawer: state.toJS().isNotificationDrawerVisible,
 });
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    displayNotificationDrawer: () => dispatch(displayNotificationDrawer()),
+    hideNotificationDrawer: () => dispatch(hideNotificationDrawer()),
+  };
+};
 // export default connect(mapStateToProps)(App);
-export { mapStateToProps };
+export { mapStateToProps, mapDispatchToProps };
