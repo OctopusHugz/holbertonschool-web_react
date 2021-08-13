@@ -75,23 +75,23 @@ describe("<App />", () => {
     window.alert.mockRestore();
   });
 
-  it("verifies default state for displayDrawer === false", () => {
-    const wrapper = shallow(<App />);
-    expect(wrapper.state().displayDrawer).toBe(false);
-  });
+  // it("verifies default state for displayDrawer === false", () => {
+  //   const wrapper = shallow(<App />);
+  //   expect(wrapper.state().displayDrawer).toBe(false);
+  // });
 
-  it("verifies that after calling handleDisplayDrawer, the state === true", () => {
-    const wrapper = shallow(<App />);
-    wrapper.instance().handleDisplayDrawer();
-    expect(wrapper.state().displayDrawer).toBe(true);
-  });
+  // it("verifies that after calling handleDisplayDrawer, the state === true", () => {
+  //   const wrapper = shallow(<App />);
+  //   wrapper.instance().handleDisplayDrawer();
+  //   expect(wrapper.state().displayDrawer).toBe(true);
+  // });
 
-  it("verifies that after calling handleHideDrawer, the state === false", () => {
-    const wrapper = shallow(<App />);
-    wrapper.setState({ displayDrawer: true });
-    wrapper.instance().handleHideDrawer();
-    expect(wrapper.state().displayDrawer).toBe(false);
-  });
+  // it("verifies that after calling handleHideDrawer, the state === false", () => {
+  //   const wrapper = shallow(<App />);
+  //   wrapper.setState({ displayDrawer: true });
+  //   wrapper.instance().handleHideDrawer();
+  //   expect(wrapper.state().displayDrawer).toBe(false);
+  // });
 
   it("verifies that the logIn function updates the state correctly", () => {
     const wrapper = shallow(<App />);
@@ -125,10 +125,16 @@ describe("<App />", () => {
       { id: 3, type: "urgent", value: "New majors available" },
     ]);
   });
+});
 
-  it("verifies mapStateToProps returns the right object for isUserLoggedIn", () => {
-    const state = fromJS({ isUserLoggedIn: true });
+describe("Redux tests", () => {
+  it("verifies mapStateToProps returns the right object for isUserLoggedIn and isNotificationDrawerVisible", () => {
+    const state = fromJS({
+      isUserLoggedIn: true,
+      isNotificationDrawerVisible: true,
+    });
     const result = mapStateToProps(state);
     expect(result.isLoggedIn).toEqual(true);
+    expect(result.displayDrawer).toEqual(true);
   });
 });
