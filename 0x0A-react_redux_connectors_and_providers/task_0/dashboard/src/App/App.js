@@ -9,6 +9,7 @@ import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBot
 import { getLatestNotification } from "../utils/utils";
 import { StyleSheet, css } from "aphrodite";
 import { user as defaultUser, AppContext } from "./AppContext";
+import { connect } from "react-redux";
 
 const marginLeftStyle = {
   marginLeft: "2rem",
@@ -67,9 +68,9 @@ export default class App extends Component {
   }
 
   markNotificationAsRead(id) {
-    const newNotifications = this.state.listNotifications.filter(notification =>
-      notification.id !== id
-    )
+    const newNotifications = this.state.listNotifications.filter(
+      (notification) => notification.id !== id
+    );
     this.setState({ listNotifications: newNotifications });
   }
 
@@ -81,7 +82,9 @@ export default class App extends Component {
     ];
 
     return (
-      <AppContext.Provider value={{user: this.state.user, logOut: this.state.logOut}}>
+      <AppContext.Provider
+        value={{ user: this.state.user, logOut: this.state.logOut }}
+      >
         <div className={css(styles.bodyStyle)}>
           <Notifications
             listNotifications={this.state.listNotifications}
@@ -133,3 +136,10 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 });
+
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.toJS().isUserLoggedIn,
+  displayDrawer: state.toJS().isNotificationDrawerVisible,
+});
+// export default connect(mapStateToProps)(App);
+export { mapStateToProps };

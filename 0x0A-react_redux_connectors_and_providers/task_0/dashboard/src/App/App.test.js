@@ -2,18 +2,23 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import { shallow, mount } from "enzyme";
-import App from "./App";
+import { mount, shallow } from "enzyme";
+import App, { mapStateToProps } from "./App";
 import Notification from "../Notifications/Notifications";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 import CourseList from "../CourseList/CourseList";
-import { StyleSheetTestUtils } from 'aphrodite';
+import { StyleSheetTestUtils } from "aphrodite";
+import { fromJS } from "immutable";
 
 StyleSheetTestUtils.suppressStyleInjection();
 
-const loggedInUser = { email: 'thedude@aim.com', password: 'thedudeabides', isLoggedIn: true };
+const loggedInUser = {
+  email: "thedude@aim.com",
+  password: "thedudeabides",
+  isLoggedIn: true,
+};
 
 describe("<App />", () => {
   it("renders an <App /> component", () => {
@@ -64,8 +69,8 @@ describe("<App />", () => {
     wrapper.setState({ user: loggedInUser });
     map.keydown({ ctrlKey: true, key: "h" });
     expect(window.alert).toHaveBeenCalledWith("Logging you out");
-    expect(wrapper.state().user.email).toBe('');
-    expect(wrapper.state().user.password).toBe('');
+    expect(wrapper.state().user.email).toBe("");
+    expect(wrapper.state().user.password).toBe("");
     expect(wrapper.state().user.isLoggedIn).toBe(false);
     window.alert.mockRestore();
   });
@@ -91,8 +96,8 @@ describe("<App />", () => {
   it("verifies that the logIn function updates the state correctly", () => {
     const wrapper = shallow(<App />);
     wrapper.instance().logIn(loggedInUser.email, loggedInUser.password);
-    expect(wrapper.state().user.email).toBe('thedude@aim.com');
-    expect(wrapper.state().user.password).toBe('thedudeabides');
+    expect(wrapper.state().user.email).toBe("thedude@aim.com");
+    expect(wrapper.state().user.password).toBe("thedudeabides");
     expect(wrapper.state().user.isLoggedIn).toBe(true);
   });
 
@@ -100,24 +105,30 @@ describe("<App />", () => {
     const wrapper = shallow(<App />);
     wrapper.setState({ user: loggedInUser });
     wrapper.state().logOut();
-    expect(wrapper.state().user.email).toBe('');
-    expect(wrapper.state().user.password).toBe('');
+    expect(wrapper.state().user.email).toBe("");
+    expect(wrapper.state().user.password).toBe("");
     expect(wrapper.state().user.isLoggedIn).toBe(false);
   });
 
-  it('verifies that markNotificationAsRead removes notification from listNotifications in state', () => {
+  it("verifies that markNotificationAsRead removes notification from listNotifications in state", () => {
     const wrapper = shallow(<App />);
     wrapper.setState({
       listNotifications: [
         { id: 1, type: "default", value: "New course available" },
         { id: 2, type: "urgent", value: "New resume available" },
         { id: 3, type: "urgent", value: "New majors available" },
-      ]
+      ],
     });
     wrapper.instance().markNotificationAsRead(2);
     expect(wrapper.state().listNotifications).toEqual([
-      { id: 1, type: 'default', value: 'New course available' },
-      { id: 3, type: 'urgent', value: 'New majors available' }
-    ])
-  })
+      { id: 1, type: "default", value: "New course available" },
+      { id: 3, type: "urgent", value: "New majors available" },
+    ]);
+  });
+
+  it("verifies mapStateToProps returns the right object for isUserLoggedIn", () => {
+    const state = fromJS({ isUserLoggedIn: true });
+    const result = mapStateToProps(state);
+    expect(result.isLoggedIn).toEqual(true);
+  });
 });
