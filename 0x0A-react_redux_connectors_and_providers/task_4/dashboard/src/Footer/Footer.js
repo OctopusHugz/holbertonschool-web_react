@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 Footer.propTypes = { user: PropTypes.object };
 Footer.defaultProps = { user: {} };
 
-const mapStateToProps = (state) => ({ user: state.toJS().user });
+const mapStateToProps = (state) => ({ user: state.ui.toJS().user });
 const ConnectedFooter = connect(mapStateToProps)(Footer);
 export default Footer;
 export { ConnectedFooter };

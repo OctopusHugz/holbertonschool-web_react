@@ -61,7 +61,7 @@ Header.defaultProps = {
   logout: () => {},
 };
 
-const mapStateToProps = (state) => ({ user: state.toJS().user });
+const mapStateToProps = (state) => ({ user: state.ui.toJS().user });
 const mapDispatchToProps = (dispatch) => ({ logout: () => dispatch(logout()) });
 const ConnectedHeader = connect(mapStateToProps, mapDispatchToProps)(Header);
 export { ConnectedHeader };

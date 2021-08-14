@@ -127,8 +127,8 @@ App.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  isLoggedIn: state.toJS().isUserLoggedIn,
-  displayDrawer: state.toJS().isNotificationDrawerVisible,
+  isLoggedIn: state.ui.toJS().isUserLoggedIn,
+  displayDrawer: state.ui.toJS().isNotificationDrawerVisible,
 });
 
 const mapDispatchToProps = (dispatch) => ({
