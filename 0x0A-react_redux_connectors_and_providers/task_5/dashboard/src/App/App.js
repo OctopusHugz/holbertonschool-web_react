@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import Notifications from "../Notifications/Notifications";
+import Notifications, {
+  ConnectedNotifications,
+} from "../Notifications/Notifications";
 import Login from "../Login/Login";
 import Footer, { ConnectedFooter } from "../Footer/Footer";
 import Header, { ConnectedHeader } from "../Header/Header";
@@ -27,14 +29,6 @@ const htmlObj = {
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
-    this.state = {
-      listNotifications: [
-        { id: 1, type: "default", value: "New course available" },
-        { id: 2, type: "urgent", value: "New resume available" },
-        { id: 3, type: "urgent", html: htmlObj },
-      ],
-    };
   }
 
   componentDidMount() {
@@ -43,13 +37,6 @@ export default class App extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("keydown", this.handleKeydown);
-  }
-
-  markNotificationAsRead(id) {
-    const newNotifications = this.state.listNotifications.filter(
-      (notification) => notification.id !== id
-    );
-    this.setState({ listNotifications: newNotifications });
   }
 
   render() {
@@ -61,8 +48,8 @@ export default class App extends Component {
 
     return (
       <div className={css(styles.bodyStyle)}>
-        <Notifications
-          listNotifications={this.state.listNotifications}
+        <ConnectedNotifications
+          listNotifications={this.props.listNotifications}
           displayDrawer={this.props.displayDrawer}
           handleDisplayDrawer={this.props.displayNotificationDrawer}
           handleHideDrawer={this.props.hideNotificationDrawer}
