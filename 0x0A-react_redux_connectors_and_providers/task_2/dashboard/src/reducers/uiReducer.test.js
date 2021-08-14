@@ -1,5 +1,5 @@
 import { SELECT_COURSE } from "../actions/courseActionTypes";
-import { displayNotificationDrawer } from "../actions/uiActionCreators";
+import { displayNotificationDrawer, login } from "../actions/uiActionCreators";
 import uiReducer from "./uiReducer";
 import { Map } from "immutable";
 
@@ -23,5 +23,14 @@ describe("uiReducer", () => {
   it("should update isNotificationDrawerVisible property in state to true when DISPLAY_NOTIFICATION_DRAWER is passed to uiReducer", () => {
     const newState = uiReducer(initialState, displayNotificationDrawer());
     expect(newState.toJS().isNotificationDrawerVisible).toEqual(true);
+  });
+
+  it("should update user property in state to user object when LOGIN is passed to uiReducer", () => {
+    const user = {
+      email: "thedude@lebowski.com",
+      password: "dudeabides",
+    };
+    const newState = uiReducer(initialState, login(user.email, user.password));
+    expect(newState.toJS().user).toEqual(user);
   });
 });
