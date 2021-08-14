@@ -5,10 +5,7 @@ import { createStore } from "redux";
 import uiReducer from "./reducers/uiReducer";
 import { Provider } from "react-redux";
 
-const store = createStore(
-  uiReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const store = createStore(uiReducer);
 
 ReactDOM.render(
   <Provider store={store}>
