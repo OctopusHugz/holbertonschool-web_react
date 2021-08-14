@@ -7,7 +7,10 @@ describe("rootReducer", () => {
     const store = createStore(rootReducer);
     expect(store.getState()).toEqual({
       courses: Map(),
-      notifications: Map(),
+      notifications: Map({
+        loading: false,
+        messages: [],
+      }),
       ui: Map({
         isNotificationDrawerVisible: false,
         isUserLoggedIn: false,
