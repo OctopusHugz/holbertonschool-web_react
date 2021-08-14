@@ -3,6 +3,7 @@ import logo from "../assets/holberton-logo.jpg";
 import { StyleSheet, css } from "aphrodite";
 import { connect } from "react-redux";
 import { logout } from "../actions/uiActionCreators";
+import PropTypes from "prop-types";
 
 export default class Header extends Component {
   render() {
@@ -13,7 +14,7 @@ export default class Header extends Component {
           <img src={logo} className={css(styles.logoStyle)} alt="logo" />
           <h1 className={css(styles.titleStyle)}>School dashboard</h1>
         </header>
-        {user.email && user.password && (
+        {user && user.email && user.password && (
           <section id="logoutSection">
             <h1>
               Welcome {user.email}
@@ -50,6 +51,15 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 });
+
+Header.propTypes = {
+  user: PropTypes.object,
+  logout: PropTypes.func,
+};
+Header.defaultProps = {
+  user: {},
+  logout: () => {},
+};
 
 const mapStateToProps = (state) => ({ user: state.toJS().user });
 const mapDispatchToProps = (dispatch) => ({ logout: () => dispatch(logout()) });

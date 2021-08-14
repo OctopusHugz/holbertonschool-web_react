@@ -2,6 +2,7 @@ import React from "react";
 import { getFullYear, getFooterCopy } from "../utils/utils";
 import { StyleSheet, css } from "aphrodite";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 const Footer = ({ user }) => {
   return (
@@ -9,7 +10,7 @@ const Footer = ({ user }) => {
       <p>
         Copyright {getFullYear()} - {getFooterCopy(true)}
       </p>
-      {user.email && user.password && (
+      {user && user.email && user.password && (
         <p>
           <a>Contact Us</a>
         </p>
@@ -26,10 +27,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({
-  user: state.toJS().user,
-  isLoggedIn: state.toJS().isUserLoggedIn,
-});
+Footer.propTypes = { user: PropTypes.object };
+Footer.defaultProps = { user: {} };
+
+const mapStateToProps = (state) => ({ user: state.toJS().user });
 const ConnectedFooter = connect(mapStateToProps)(Footer);
 export default Footer;
 export { ConnectedFooter };
