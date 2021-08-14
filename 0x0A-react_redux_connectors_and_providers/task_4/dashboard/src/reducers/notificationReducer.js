@@ -9,7 +9,7 @@ import { notificationsNormalizer } from "../schema/notifications";
 
 const initialState = Map();
 
-export function notificationReducer(state = initialState, action) {
+export default function notificationReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_NOTIFICATIONS_SUCCESS: {
       const fullNotificationsObjs = action.data.map((notification) => ({

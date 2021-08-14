@@ -5,8 +5,7 @@ import {
   setNotificationFilter,
 } from "../actions/notificationActionCreators";
 import { notificationsNormalizer } from "../schema/notifications";
-import {
-  notificationReducer,
+import notificationReducer, {
   fetchNotificationsSuccessAction,
 } from "./notificationReducer";
 

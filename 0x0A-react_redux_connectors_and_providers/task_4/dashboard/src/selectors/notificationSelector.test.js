@@ -1,6 +1,5 @@
-import {
+import notificationReducer, {
   fetchNotificationsSuccessAction,
-  notificationReducer,
 } from "../reducers/notificationReducer";
 import {
   filterTypeSelected,
