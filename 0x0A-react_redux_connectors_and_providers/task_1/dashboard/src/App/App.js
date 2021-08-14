@@ -9,6 +9,7 @@ import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBot
 import { getLatestNotification } from "../utils/utils";
 import { StyleSheet, css } from "aphrodite";
 import { user as defaultUser, AppContext } from "./AppContext";
+import { connect } from "react-redux";
 import {
   displayNotificationDrawer,
   hideNotificationDrawer,
@@ -148,11 +149,11 @@ const mapStateToProps = (state) => ({
   displayDrawer: state.toJS().isNotificationDrawerVisible,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    displayNotificationDrawer: () => dispatch(displayNotificationDrawer()),
-    hideNotificationDrawer: () => dispatch(hideNotificationDrawer()),
-  };
-};
-// export default connect(mapStateToProps)(App);
-export { mapStateToProps, mapDispatchToProps };
+const mapDispatchToProps = (dispatch) => ({
+  displayNotificationDrawer: () => dispatch(displayNotificationDrawer()),
+  hideNotificationDrawer: () => dispatch(hideNotificationDrawer()),
+});
+
+const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
+
+export { mapStateToProps, mapDispatchToProps, ConnectedApp };
