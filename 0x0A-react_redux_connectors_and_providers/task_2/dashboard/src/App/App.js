@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import Notifications from "../Notifications/Notifications";
 import Login from "../Login/Login";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
+import Footer, { ConnectedFooter } from "../Footer/Footer";
+import Header, { ConnectedHeader } from "../Header/Header";
 import CourseList from "../CourseList/CourseList";
 import BodySection from "../BodySection/BodySection";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import { getLatestNotification } from "../utils/utils";
 import { StyleSheet, css } from "aphrodite";
-import { user as defaultUser, AppContext } from "./AppContext";
 import { connect } from "react-redux";
 import {
   displayNotificationDrawer,
   hideNotificationDrawer,
+  loginRequest,
 } from "../actions/uiActionCreators";
 import PropTypes from "prop-types";
 
@@ -27,13 +27,8 @@ const htmlObj = {
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.logIn = this.logIn.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.state = {
-      user: defaultUser,
-      logOut: () => {
-        this.setState({ user: defaultUser });
-      },
       listNotifications: [
         { id: 1, type: "default", value: "New course available" },
         { id: 2, type: "urgent", value: "New resume available" },
@@ -48,17 +43,6 @@ export default class App extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("keydown", this.handleKeydown);
-  }
-
-  handleKeydown = (event) => {
-    if (event.ctrlKey && event.key === "h") {
-      alert("Logging you out");
-      this.state.logOut();
-    }
-  };
-
-  logIn(email, password) {
-    this.setState({ user: { email, password, isLoggedIn: true } });
   }
 
   markNotificationAsRead(id) {
@@ -76,37 +60,33 @@ export default class App extends Component {
     ];
 
     return (
-      <AppContext.Provider
-        value={{ user: this.state.user, logOut: this.state.logOut }}
-      >
-        <div className={css(styles.bodyStyle)}>
-          <Notifications
-            listNotifications={this.state.listNotifications}
-            displayDrawer={this.props.displayDrawer}
-            handleDisplayDrawer={this.props.displayNotificationDrawer}
-            handleHideDrawer={this.props.hideNotificationDrawer}
-            markNotificationAsRead={this.markNotificationAsRead}
-          />
-          <div className="App">
-            <Header />
-            <hr className={css(styles.hrStyle)} />
-            {this.state.user.isLoggedIn ? (
-              <BodySectionWithMarginBottom title="Course list">
-                <CourseList listCourses={listCourses} />
-              </BodySectionWithMarginBottom>
-            ) : (
-              <BodySectionWithMarginBottom title="Log in to continue">
-                <Login logIn={this.logIn} />
-              </BodySectionWithMarginBottom>
-            )}
-            <BodySection title="News from the School">
-              <p style={marginLeftStyle}>Graduation date is September 17th!</p>
-            </BodySection>
-            <hr className={css(styles.hrStyle)} />
-            <Footer className={css(styles.footerStyle)} />
-          </div>
+      <div className={css(styles.bodyStyle)}>
+        <Notifications
+          listNotifications={this.state.listNotifications}
+          displayDrawer={this.props.displayDrawer}
+          handleDisplayDrawer={this.props.displayNotificationDrawer}
+          handleHideDrawer={this.props.hideNotificationDrawer}
+          markNotificationAsRead={this.markNotificationAsRead}
+        />
+        <div className="App">
+          <ConnectedHeader />
+          <hr className={css(styles.hrStyle)} />
+          {this.props.isLoggedIn ? (
+            <BodySectionWithMarginBottom title="Course list">
+              <CourseList listCourses={listCourses} />
+            </BodySectionWithMarginBottom>
+          ) : (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login logIn={this.props.login} />
+            </BodySectionWithMarginBottom>
+          )}
+          <BodySection title="News from the School">
+            <p style={marginLeftStyle}>Graduation date is September 17th!</p>
+          </BodySection>
+          <hr className={css(styles.hrStyle)} />
+          <ConnectedFooter className={css(styles.footerStyle)} />
         </div>
-      </AppContext.Provider>
+      </div>
     );
   }
 }
@@ -136,12 +116,14 @@ App.propTypes = {
   displayDrawer: PropTypes.bool,
   displayNotificationDrawer: PropTypes.func,
   hideNotificationDrawer: PropTypes.func,
+  login: PropTypes.func,
 };
 App.defaultProps = {
   isLoggedIn: false,
   displayDrawer: false,
   displayNotificationDrawer: () => {},
   hideNotificationDrawer: () => {},
+  login: () => {},
 };
 
 const mapStateToProps = (state) => ({
@@ -152,6 +134,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   displayNotificationDrawer: () => dispatch(displayNotificationDrawer()),
   hideNotificationDrawer: () => dispatch(hideNotificationDrawer()),
+  login: (email, password) => dispatch(loginRequest(email, password)),
 });
 
 const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
