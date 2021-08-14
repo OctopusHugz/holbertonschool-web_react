@@ -19,18 +19,18 @@ describe("<Header />", () => {
     expect(wrapper).toHaveLength(1);
   });
 
-  it("mounts a <Header /> component and checks contents", () => {
+  it("renders a <Header /> component and checks contents", () => {
     const wrapper = shallow(<Header />);
     expect(wrapper.find("header h1")).toHaveLength(1);
     expect(wrapper.find("header img")).toHaveLength(1);
   });
 
-  it("mounts a <Header /> component with default context and verifies that logoutSection is not created", () => {
+  it("renders a <Header /> component with default context and verifies that logoutSection is not created", () => {
     const wrapper = shallow(<Header />);
     expect(wrapper.find("#logoutSection")).toHaveLength(0);
   });
 
-  it("mounts a <Header /> component with user defined and verifies that logoutSection is created", () => {
+  it("renders a <Header /> component with user defined and verifies that logoutSection is created", () => {
     const wrapper = shallow(<Header user={loggedInUser} />);
     expect(wrapper.find("#logoutSection")).toHaveLength(1);
   });
