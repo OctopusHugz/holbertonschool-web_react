@@ -2,18 +2,20 @@ import React, { PureComponent } from "react";
 import NotificationItem from "./NotificationItem";
 import icon from "../assets/close-icon.png";
 import PropTypes from "prop-types";
-import NotificationItemShape from "./NotificationItemShape";
 import { StyleSheet, css } from "aphrodite";
+import { connect } from "react-redux";
+import { fetchNotifications } from "../actions/notificationActionCreators";
 
 export default class Notifications extends PureComponent {
-  constructor(props) { super(props); }
+  constructor(props) {
+    super(props);
+  }
 
   static propTypes = {
     displayDrawer: PropTypes.bool,
-    listNotifications: PropTypes.arrayOf(NotificationItemShape),
+    listNotifications: PropTypes.array,
     handleDisplayDrawer: PropTypes.func,
     handleHideDrawer: PropTypes.func,
-    markNotificationAsRead: PropTypes.func,
   };
 
   static defaultProps = {
@@ -21,19 +23,27 @@ export default class Notifications extends PureComponent {
     listNotifications: [],
     handleDisplayDrawer: () => {},
     handleHideDrawer: () => {},
-    markNotificationAsRead: () => {},
   };
 
-  shouldMenuBeHidden() { return this.props.displayDrawer ? true : false; }
+  shouldMenuBeHidden() {
+    return this.props.displayDrawer ? true : false;
+  }
+
+  componentDidMount() {
+    fetchNotifications();
+  }
 
   render() {
     const menuItemClassName = css(
       styles.menuItemStyle,
       this.shouldMenuBeHidden() && styles.displayNone
-    )
+    );
     return (
       <>
-        <div className={`menuItem ${menuItemClassName}`} onClick={this.props.handleDisplayDrawer}>
+        <div
+          className={`menuItem ${menuItemClassName}`}
+          onClick={this.props.handleDisplayDrawer}
+        >
           Your notifications
         </div>
         {this.props.displayDrawer && (
@@ -59,7 +69,7 @@ export default class Notifications extends PureComponent {
                         value={notification.value}
                         html={notification.html}
                         markNotificationAsRead={() => {
-                          this.props.markNotificationAsRead(notification.id)
+                          this.props.markNotificationAsRead(notification.id);
                         }}
                       />
                     ))}
@@ -127,8 +137,8 @@ const styles = StyleSheet.create({
     ":hover": {
       cursor: "pointer",
       animationName: [opacityKeyframes, translateKeyframes],
-      animationDuration: '1s, 500ms',
-      animationIterationCount: '3',
+      animationDuration: "1s, 500ms",
+      animationIterationCount: "3",
     },
   },
 
@@ -138,6 +148,20 @@ const styles = StyleSheet.create({
   },
 
   displayNone: {
-    display: 'none',
+    display: "none",
   },
 });
+
+const mapStateToProps = (state) => ({
+  listNotifications: state.notifications.toJS().messages,
+});
+const mapDispatchToProps = (dispatch) => ({
+  fetchNotifications: dispatch(fetchNotifications()),
+});
+
+const ConnectedNotifications = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Notifications);
+
+export { ConnectedNotifications };
