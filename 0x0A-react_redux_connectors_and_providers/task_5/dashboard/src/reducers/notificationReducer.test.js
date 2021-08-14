@@ -1,142 +1,40 @@
-import { fromJS, Map } from "immutable";
-import {
-  fetchNotificationsSuccess,
-  markAsAread,
-  setNotificationFilter,
-} from "../actions/notificationActionCreators";
+import { Map } from "immutable";
 import { notificationsNormalizer } from "../schema/notifications";
-import notificationReducer, {
-  fetchNotificationsSuccessAction,
-} from "./notificationReducer";
+import notificationReducer from "./notificationReducer";
+import notifications from "../../../../notifications.json";
+import { FETCH_NOTIFICATIONS_SUCCESS } from "../actions/notificationActionTypes";
 
-const defaultState = {
-  filter: "DEFAULT",
-  notifications: [
-    {
-      id: 1,
-      isRead: false,
-      type: "default",
-      value: "New course available",
-    },
-    {
-      id: 2,
-      isRead: false,
-      type: "urgent",
-      value: "New resume available",
-    },
-    {
-      id: 3,
-      isRead: false,
-      type: "urgent",
-      value: "New data available",
-    },
-  ],
-};
+const defaultState = Map({
+  loading: false,
+  messages: [],
+});
 
-const normalizedNotifications = {
-  ...defaultState,
-  notifications: notificationsNormalizer(defaultState.notifications),
-};
-
-const readNotificationState = {
-  filter: "DEFAULT",
-  notifications: [
-    {
-      id: 1,
-      isRead: false,
-      type: "default",
-      value: "New course available",
-    },
-    {
-      id: 2,
-      isRead: true,
-      type: "urgent",
-      value: "New resume available",
-    },
-    {
-      id: 3,
-      isRead: false,
-      type: "urgent",
-      value: "New data available",
-    },
-  ],
-};
-
-const readNormalizedNotifications = {
-  ...readNotificationState,
-  notifications: notificationsNormalizer(readNotificationState.notifications),
-};
-
-const urgentFilterState = {
-  filter: "URGENT",
-  notifications: [
-    {
-      id: 1,
-      isRead: false,
-      type: "default",
-      value: "New course available",
-    },
-    {
-      id: 2,
-      isRead: false,
-      type: "urgent",
-      value: "New resume available",
-    },
-    {
-      id: 3,
-      isRead: false,
-      type: "urgent",
-      value: "New data available",
-    },
-  ],
-};
-
-const urgentNormalizedNotifications = {
-  ...urgentFilterState,
-  notifications: notificationsNormalizer(urgentFilterState.notifications),
+const fetchNotificationsAction = {
+  type: FETCH_NOTIFICATIONS_SUCCESS,
+  payload: notifications,
 };
 
 describe("notificationReducer", () => {
   it("should return the initial state for the default case", () => {
-    const newState = notificationReducer(Map(), "");
-    expect(newState).toEqual(Map());
+    const newState = notificationReducer(defaultState, "");
+    expect(newState.toJS().loading).toEqual(false);
+    expect(newState.toJS().messages).toEqual([]);
   });
 
-  it("should return data from FETCH_NOTIFICATIONS_SUCCESS", () => {
-    // Task is unclear if we should use
-    // action creator for FETCH_NOTIFICATIONS_SUCCESS
-    // So I tested using both
-    // const fetchNotificationsSuccessAction in notificationReducer
-    // And using the fetchCourseSuccess action creator
-    const fetchNotificationsSuccessActionFromCreator =
-      fetchNotificationsSuccess();
+  it("should return data from fetchNotifications", () => {
     const newState = notificationReducer(
-      Map(),
-      fetchNotificationsSuccessAction
+      defaultState,
+      fetchNotificationsAction
     );
-    expect(newState.toJS()).toEqual(normalizedNotifications);
-    const secondNewState = notificationReducer(
-      Map(),
-      fetchNotificationsSuccessActionFromCreator
+    const normalizedNotifications = notificationsNormalizer(
+      fetchNotificationsAction.payload
     );
-    expect(secondNewState.toJS()).toEqual(normalizedNotifications);
-  });
-
-  it("should return the data with the right course property isRead === true for MARK_AS_READ", () => {
-    const markAsReadAction = markAsAread(2);
-    const newState = notificationReducer(
-      fromJS(normalizedNotifications),
-      markAsReadAction
-    );
-    expect(newState.toJS()).toEqual(readNormalizedNotifications);
-  });
-
-  it("should return the data with the right course property filter === 'URGENT' type for SET_TYPE_FILTER", () => {
-    const setNotificationFilterAction = setNotificationFilter("URGENT");
-    const newState = notificationReducer(
-      fromJS(normalizedNotifications),
-      setNotificationFilterAction
-    );
-    expect(newState.toJS()).toEqual(urgentNormalizedNotifications);
+    const allNotifications = {
+      messages: Object.entries(normalizedNotifications.entities.messages).map(
+        (notification, index) => ({ ...notification[1], id: index })
+      ),
+    };
+    expect(newState.toJS().messages).toEqual(allNotifications.messages);
+    expect(newState.toJS().loading).toEqual(false);
   });
 });
