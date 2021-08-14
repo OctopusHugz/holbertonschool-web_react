@@ -1,5 +1,5 @@
 import { SELECT_COURSE } from "../actions/courseActionTypes";
-import { DISPLAY_NOTIFICATION_DRAWER } from "../actions/uiActionTypes";
+import { displayNotificationDrawer } from "../actions/uiActionCreators";
 import uiReducer from "./uiReducer";
 import { Map } from "immutable";
 
@@ -21,7 +21,7 @@ describe("uiReducer", () => {
   });
 
   it("should update isNotificationDrawerVisible property in state to true when DISPLAY_NOTIFICATION_DRAWER is passed to uiReducer", () => {
-    const newState = uiReducer(initialState, DISPLAY_NOTIFICATION_DRAWER);
+    const newState = uiReducer(initialState, displayNotificationDrawer());
     expect(newState.toJS().isNotificationDrawerVisible).toEqual(true);
   });
 });
