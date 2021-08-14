@@ -3,10 +3,9 @@ import {
   selectCourse,
   unSelectCourse,
 } from "../actions/courseActionCreators";
-import { courseReducer, fetchCourseSuccessAction } from "./courseReducer";
+import courseReducer, { fetchCourseSuccessAction } from "./courseReducer";
 import coursesNormalizer from "../schema/courses";
 import { fromJS, Map } from "immutable";
-import { normalize } from "normalizr";
 
 const courseList = [
   {

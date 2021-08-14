@@ -8,7 +8,7 @@ import coursesNormalizer from "../schema/courses";
 
 const initialState = Map();
 
-export function courseReducer(state = initialState, action) {
+export default function courseReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_COURSE_SUCCESS: {
       const fullCourseObjs = action.data.map((course) => ({
