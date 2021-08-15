@@ -62,15 +62,15 @@ export default class Notifications extends PureComponent {
                     <img src={icon} alt="" style={{ height: "3vh" }} />
                   </button>
                   <ul className={css(styles.listStyle)}>
-                    {this.props.listNotifications.map((notification) => (
+                    {this.props.listNotifications.map((notification, index) => (
                       <NotificationItem
-                        key={notification.id}
+                        key={index}
                         type={notification.type}
                         value={notification.value}
                         html={notification.html}
-                        markNotificationAsRead={() => {
-                          this.props.markNotificationAsRead(notification.id);
-                        }}
+                        // markNotificationAsRead={() => {
+                        //   this.props.markNotificationAsRead(notification.id);
+                        // }}
                       />
                     ))}
                   </ul>
@@ -152,9 +152,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({
-  listNotifications: state.notifications.toJS().messages,
-});
+const mapStateToProps = (state) => {
+  const notificationsList = [
+    ...Object.values(
+      state.notifications.valueSeq().toArray()[2].entities.messages
+    ),
+  ];
+  return {
+    listNotifications: notificationsList,
+  };
+};
 const mapDispatchToProps = (dispatch) => ({
   fetchNotifications: dispatch(fetchNotifications()),
 });

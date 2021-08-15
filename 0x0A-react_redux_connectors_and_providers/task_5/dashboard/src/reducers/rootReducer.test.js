@@ -9,7 +9,14 @@ describe("rootReducer", () => {
       courses: Map(),
       notifications: Map({
         loading: false,
-        messages: [],
+        filter: "DEFAULT",
+        notifications: {
+          entities: {
+            notifications: {},
+            messages: {},
+            users: {},
+          },
+        },
       }),
       ui: Map({
         isNotificationDrawerVisible: false,
