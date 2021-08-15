@@ -6,7 +6,7 @@ import {
 import { Map } from "immutable";
 import coursesNormalizer from "../schema/courses";
 
-const initialState = Map();
+const initialState = Map([]);
 
 export function courseReducer(state = initialState, action) {
   switch (action.type) {

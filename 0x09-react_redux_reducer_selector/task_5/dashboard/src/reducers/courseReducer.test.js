@@ -6,7 +6,8 @@ import {
 import { courseReducer, fetchCourseSuccessAction } from "./courseReducer";
 import coursesNormalizer from "../schema/courses";
 import { fromJS, Map } from "immutable";
-import { normalize } from "normalizr";
+
+const initialState = Map([]);
 
 const courseList = [
   {
@@ -56,8 +57,8 @@ const normalizedSelectedCourseList = coursesNormalizer(selectedCourseList);
 
 describe("courseReducer", () => {
   it("should return an empty Map for the default state", () => {
-    const newState = courseReducer(undefined, "");
-    expect(newState).toEqual(Map());
+    const newState = courseReducer(initialState, "");
+    expect(newState).toEqual(initialState);
   });
 
   it("should return data from FETCH_COURSE_SUCCESS with isSelected === false", () => {
@@ -65,10 +66,10 @@ describe("courseReducer", () => {
     // So I tested using both const fetchCourseSuccessAction in courseReducer
     // And using the fetchCourseSuccess action creator
     const fetchCourseSuccessActionFromCreator = fetchCourseSuccess();
-    const newState = courseReducer(Map(), fetchCourseSuccessAction);
+    const newState = courseReducer(initialState, fetchCourseSuccessAction);
     expect(newState.toJS()).toEqual(normalizedCourseList);
     const secondNewState = courseReducer(
-      Map(),
+      initialState,
       fetchCourseSuccessActionFromCreator
     );
     expect(secondNewState.toJS()).toEqual(normalizedCourseList);
