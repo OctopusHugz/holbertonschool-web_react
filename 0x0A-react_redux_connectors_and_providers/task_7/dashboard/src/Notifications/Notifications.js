@@ -4,7 +4,12 @@ import icon from "../assets/close-icon.png";
 import PropTypes from "prop-types";
 import { StyleSheet, css } from "aphrodite";
 import { connect } from "react-redux";
-import { fetchNotifications } from "../actions/notificationActionCreators";
+import {
+  fetchNotifications,
+  markAsAread,
+} from "../actions/notificationActionCreators";
+import { getUnreadNotifications } from "../selectors/notificationSelector";
+import { fromJS } from "immutable";
 
 export default class Notifications extends PureComponent {
   constructor(props) {
@@ -68,9 +73,9 @@ export default class Notifications extends PureComponent {
                         type={notification.type}
                         value={notification.value}
                         html={notification.html}
-                        // markNotificationAsRead={() => {
-                        //   this.props.markNotificationAsRead(notification.id);
-                        // }}
+                        markNotificationAsRead={() => {
+                          this.props.markNotificationAsRead(notification.guid);
+                        }}
                       />
                     ))}
                   </ul>
@@ -153,17 +158,13 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const notificationsList = [
-    ...Object.values(
-      state.notifications.valueSeq().toArray()[2].entities.messages
-    ),
-  ];
   return {
-    listNotifications: notificationsList,
+    listNotifications: getUnreadNotifications(fromJS(state)),
   };
 };
 const mapDispatchToProps = (dispatch) => ({
   fetchNotifications: dispatch(fetchNotifications()),
+  markNotificationAsRead: (id) => dispatch(markAsAread(id)),
 });
 
 const ConnectedNotifications = connect(
